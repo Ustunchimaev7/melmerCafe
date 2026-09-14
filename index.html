@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mel & Mer Café | Lefke, Kuzey Kıbrıs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --whitewash:#F7F3EA;
+    --card:#EFE8D8;
+    --ink:#21262B;
+    --ink-soft:#4B5259;
+    --deep-blue:#1F4B5C;
+    --sea:#4E9B95;
+    --terracotta:#C1602A;
+    --line:#DCD2B9;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--whitewash);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Spectral', serif;
+    line-height:1.1;
+    color:var(--ink);
+    font-weight:600;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1100px; margin:0 auto; padding:0 28px;}
+  ul{list-style:none;}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(247,243,234,0.94);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 28px; max-width:1100px; margin:0 auto;
+  }
+  .logo{font-family:'Spectral', serif; font-size:1.3rem; font-weight:700; color:var(--deep-blue);}
+  .logo span{color:var(--terracotta);}
+  nav ul{display:flex; gap:28px;}
+  nav a{font-size:0.92rem; font-weight:600; color:var(--ink-soft); border-bottom:2px solid transparent; padding-bottom:4px;}
+  nav a:hover{border-color:var(--sea); color:var(--deep-blue);}
+  .header-cta{
+    background:var(--deep-blue); color:var(--whitewash);
+    padding:10px 20px; font-weight:600; font-size:0.9rem;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{position:relative; height:88vh; min-height:560px; overflow:hidden;}
+  .hero img{width:100%; height:100%; object-fit:cover;}
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(31,75,92,0.15) 0%, rgba(20,30,34,0.55) 100%);
+  }
+  .hero-copy{
+    position:absolute; left:0; right:0; bottom:64px; z-index:2;
+    color:#fff; text-align:left;
+  }
+  .hero-copy .wrap{max-width:1100px;}
+  .hero-kicker{font-size:0.95rem; font-weight:600; letter-spacing:0.02em; margin-bottom:14px; color:#E8E0CB;}
+  .hero-copy h1{font-size:3rem; max-width:14ch; margin-bottom:18px; color:#fff;}
+  .hero-copy p{max-width:44ch; font-size:1.1rem; color:#E8E0CB; margin-bottom:28px;}
+  .btn-row{display:flex; gap:16px; flex-wrap:wrap;}
+  .btn{padding:14px 26px; font-weight:600; font-size:0.95rem;}
+  .btn-primary{background:var(--terracotta); color:#fff;}
+  .btn-secondary{border:1.5px solid #fff; color:#fff;}
+  .wave{position:absolute; bottom:-1px; left:0; width:100%; z-index:2; line-height:0;}
+
+  /* ---------- Stats strip ---------- */
+  .stats{
+    background:var(--deep-blue); color:var(--whitewash);
+    padding:28px 0;
+  }
+  .stats .wrap{display:flex; justify-content:space-between; flex-wrap:wrap; gap:20px; text-align:center;}
+  .stats div{flex:1; min-width:140px;}
+  .stats strong{display:block; font-family:'Spectral', serif; font-size:1.5rem; color:#fff;}
+  .stats span{font-size:0.85rem; color:#B9CBCF;}
+
+  /* ---------- Section shell ---------- */
+  section{padding:88px 0;}
+  .section-head{max-width:56ch; margin-bottom:44px;}
+  .kicker{color:var(--terracotta); font-weight:700; font-size:0.9rem; margin-bottom:10px;}
+  .section-head h2{font-size:2.1rem; margin-bottom:14px;}
+  .section-head p{color:var(--ink-soft); font-size:1.05rem;}
+
+  /* ---------- Story ---------- */
+  .story{background:var(--card); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .story-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px; align-items:center;}
+  .story-grid img{border-radius:2px;}
+  .story-grid p{color:var(--ink-soft); margin-bottom:16px;}
+  .feature-list{display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:28px;}
+  .feature-list div{border-left:2px solid var(--sea); padding-left:14px;}
+  .feature-list h4{font-family:'Spectral', serif; font-size:1.05rem; margin-bottom:4px;}
+  .feature-list p{color:var(--ink-soft); font-size:0.92rem; margin:0;}
+
+  /* ---------- Menu ---------- */
+  .menu-tabs{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:36px;}
+  .menu-tab{
+    padding:9px 18px; border:1.5px solid var(--deep-blue); font-weight:600; font-size:0.9rem;
+    background:transparent; color:var(--deep-blue); cursor:pointer;
+  }
+  .menu-tab.active, .menu-tab:hover{background:var(--deep-blue); color:#fff;}
+  .menu-category{display:none;}
+  .menu-category.active{display:grid; grid-template-columns:1fr 1fr; gap:0 48px;}
+  .menu-item{display:flex; justify-content:space-between; gap:16px; padding:18px 0; border-bottom:1px dashed var(--line);}
+  .menu-item-name{font-family:'Spectral', serif; font-weight:600; font-size:1.08rem; margin-bottom:4px;}
+  .menu-item-desc{color:var(--ink-soft); font-size:0.9rem;}
+  .menu-item-price{font-family:'Spectral', serif; font-weight:600; color:var(--terracotta); white-space:nowrap;}
+  .price-tbd{color:#B7A98C; font-size:0.8rem; font-style:italic;}
+
+  /* ---------- Gallery ---------- */
+  .gallery-grid{display:grid; grid-template-columns:repeat(4, 1fr); grid-auto-rows:180px; gap:12px;}
+  .gallery-grid img{width:100%; height:100%; object-fit:cover;}
+  .gallery-grid > *:nth-child(1){grid-column:span 2; grid-row:span 2;}
+  .gallery-grid > *:nth-child(4){grid-row:span 2;}
+
+  /* ---------- Reviews ---------- */
+  .reviews{background:var(--deep-blue); color:var(--whitewash);}
+  .reviews .section-head p{color:#B9CBCF;}
+  .reviews .kicker{color:#E8B98A;}
+  .review-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .review-card{background:rgba(255,255,255,0.06); padding:26px; border-left:3px solid var(--terracotta);}
+  .review-card p{font-style:italic; margin-bottom:14px; color:#E8E0CB;}
+  .review-card span{font-size:0.85rem; color:#9FB8BD;}
+
+  /* ---------- Contact ---------- */
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px;}
+  .contact-block{margin-bottom:26px;}
+  .contact-block h3{font-size:1.05rem; margin-bottom:8px; color:var(--deep-blue);}
+  .contact-block p, .contact-block a{color:var(--ink-soft); display:block; margin-bottom:4px;}
+  .hours-row{display:flex; justify-content:space-between; max-width:340px; padding:6px 0; border-bottom:1px solid var(--line);}
+  .map-frame{border:none; width:100%; height:320px;}
+
+  footer{
+    background:var(--ink); color:#9AA3A8; text-align:center; padding:32px 28px; font-size:0.85rem;
+  }
+
+  @media (max-width: 860px){
+    nav{display:none;}
+    .hero-copy h1{font-size:2.2rem;}
+    .story-grid, .contact-grid{grid-template-columns:1fr;}
+    .menu-category.active{grid-template-columns:1fr;}
+    .stats .wrap{justify-content:flex-start;}
+    .review-grid{grid-template-columns:1fr;}
+    .gallery-grid{grid-template-columns:repeat(2,1fr);}
+    .gallery-grid > *:nth-child(1){grid-column:span 2;}
+  }
+  :focus-visible{outline:3px solid var(--terracotta); outline-offset:2px;}
+  @media (prefers-reduced-motion: reduce){ *{transition:none !important;} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">Mel <span>&</span> Mer</a>
+    <nav>
+      <ul>
+        <li><a href="#hikaye">Hikâye</a></li>
+        <li><a href="#menu">Menü</a></li>
+        <li><a href="#galeri">Galeri</a></li>
+        <li><a href="#yorumlar">Yorumlar</a></li>
+        <li><a href="#iletisim">Bize Ulaşın</a></li>
+      </ul>
+    </nav>
+    <a class="header-cta" href="https://wa.me/905488680818" target="_blank" rel="noopener">Rezervasyon</a>
+  </div>
+</header>
+
+<section class="hero">
+  <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=1600&q=80" alt="Deniz manzaralı kafe terası">
+  <div class="hero-copy">
+    <div class="wrap">
+      <p class="hero-kicker">Lefke, Kuzey Kıbrıs · 2018'den beri</p>
+      <h1>Deniz kıyısında, ailenin sofrasında.</h1>
+      <p>Serpme kahvaltı ve taze Akdeniz mutfağı — dalgaların sesine eşlik ettiği bir sofra.</p>
+      <div class="btn-row">
+        <a href="#menu" class="btn btn-primary">Menüyü Gör</a>
+        <a href="https://wa.me/905488680818" target="_blank" rel="noopener" class="btn btn-secondary">WhatsApp'tan Yaz</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="wrap">
+    <div><strong>2018</strong><span>Kuruluş yılı</span></div>
+    <div><strong>Salı hariç</strong><span>Her gün açığız</span></div>
+    <div><strong>09:00–19:00</strong><span>Çalışma saatleri</span></div>
+    <div><strong>Aile işletmesi</strong><span>İlk günden bu yana</span></div>
+  </div>
+</div>
+
+<section class="story" id="hikaye">
+  <div class="wrap story-grid">
+    <img src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=700&q=80" alt="Kafe mutfağında hazırlık">
+    <div>
+      <p class="kicker">Hikâyemiz</p>
+      <h2>Akdeniz kıyısında bir aile sofrası</h2>
+      <p>Mel & Mer, 2018'de denize bakan küçük bir aile sofrası olarak başladı. Komşular misafir, misafirler zamanla aile oldu.</p>
+      <p>Serpme kahvaltıdan akşamın soğuk birasına, her şey büyürken yediğimiz tariflerle, aynı özenle hazırlanıyor.</p>
+      <div class="feature-list">
+        <div><h4>Deniz Manzaralı Teras</h4><p>Her masadan Akdeniz görünür.</p></div>
+        <div><h4>Günlük Taze</h4><p>Yerel üreticilerden tedarik ediyoruz.</p></div>
+        <div><h4>Aile İşletmesi</h4><p>İlk günden bu yana Mel & Mer ailesi işletiyor.</p></div>
+        <div><h4>Geniş Mutfak</h4><p>Türk, Kıbrıs ve dünya mutfağından seçkiler.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="kicker">À la Carte</p>
+      <h2>Menü</h2>
+      <p>Fiyatları kendi listenle güncelleyebilirsin — şimdilik "eklenecek" olarak işaretledim.</p>
+    </div>
+
+    <div class="menu-tabs">
+      <button class="menu-tab active" data-target="atistirmalik">Atıştırmalıklar</button>
+      <button class="menu-tab" data-target="anayemek">Ana Yemekler</button>
+      <button class="menu-tab" data-target="burger">Burger</button>
+      <button class="menu-tab" data-target="hamurisi">Hamur İşleri</button>
+    </div>
+
+    <div class="menu-category active" id="atistirmalik">
+      <div class="menu-item"><div><div class="menu-item-name">Bira Tabağı</div><div class="menu-item-desc">4 sosis, 2 peynirli rulo, 4 soğan halkası, 4 mini tenders ve patates kızartması</div></div><div class="menu-item-price price-tbd">eklenecek</div></div>
+      <div class="menu-item"><div><div class="menu-item-name">Patates Kızartması</div><div class="menu-item-desc">Küçük / Büyük</div></div><div class="menu-item-price price-tbd">eklenecek</div></div>
+      <div class="menu-item"><div><div class="menu-item-name">Tenders & Patates</div><div class="menu-item-desc">3 adet tenders, patates kızartması ile</div></div><div class="menu-item-price price-tbd">eklenecek</div></div>
+      <div class="menu-item"><div><div class="menu-item-name">Ballı Kaymaklı Saganaki</div><div class="menu-item-desc">Kızarmış hellim, kaymak ve bal</div></div><div class="menu-item-price price-tbd">eklenecek</div></div>
+      <div class="menu-item"><div><div class="menu-item-name">Falafel</div><div class="menu-item-desc">4 adet, limon-tahin sos ve turşu ile</div></div><div class="menu-item-price price-tbd">eklenecek</div></div>
+    </div>
+
+    <div class="menu-category" id="anayemek">
+      <div class="menu-item"><div><div class="menu-item-name">Izgara Köfte</div><div class="menu-item-desc">200 g dana köfte, pilav, yoğurt, salata, patates</div></div><div class="menu-item-price price-tbd">eklenecek</div></div>
+      <div class="menu-item"><div><div class="menu-item-name">Kıbrıs Köftesi</div><div class="menu-item-desc">Ev yapımı 4 köfte, haşlanmış börülce, Kıbrıs ekmeği</div></div><div class="menu-item-price price-tbd">eklenecek</div></div>
+      <div class="menu-item"><div><div class="menu-item-name">Izgara Tavuk</div><div class="menu-item-desc">200 g fileto, pilav ve salata ile</div></div><div class="menu-item-price price-tbd">eklenecek</div></div>
+      <div class="menu-item"><div><div class="menu-item-name">Doldurulmuş Tavuk Göğsü</div><div class="menu-item-desc">Mantarlı beşamel sos, pilav ve salata</div></div><div class="menu-item-price price-tbd">eklenecek</div></div>
+      <div class="menu-item"><div><div class="menu-item-name">Karışık Zeytinyağlı Dolma</div><div class="menu-item-desc">Kuru biber, patlıcan ve yaprak sarma, yoğurtla</div></div><div class="menu-item-price price-tbd">eklenecek</div></div>
+      <div class="menu-item"><div><div class="menu-item-name">Tavuk Curry</div><div class="menu-item-desc">Köri baharatlı, kremalı, pilav ve patates ile</div></div><div class="menu-item-price price-tbd">eklenecek</div></div>
+    </div>
+
+    <div class="menu-category" id="burger">
+      <div class="menu-item"><div><div class="menu-item-name">Mel&Mer Special Burger</div><div class="menu-item-desc">130 g dana köfte, karamelize soğan, mantar, cheddar</div></div><div class="menu-item-price price-tbd">eklenecek</div></div>
+      <div class="menu-item"><div><div class="menu-item-name">Chicken Burger</div><div class="menu-item-desc">Çıtır tavuk, cheddar, domates, marul, patates</div></div><div class="menu-item-price price-tbd">eklenecek</div></div>
+      <div class="menu-item"><div><div class="menu-item-name">Bacon Burger</div><div class="menu-item-desc">130 g köfte, mantar, karamelize soğan, bacon, cheddar</div></div><div class="menu-item-price price-tbd">eklenecek</div></div>
+      <div class="menu-item"><div><div class="menu-item-name">Cheeseburger</div><div class="menu-item-desc">130 g köfte, cheddar, domates, marul, patates</div></div><div class="menu-item-price price-tbd">eklenecek</div></div>
+    </div>
+
+    <div class="menu-category" id="hamurisi">
+      <div class="menu-item"><div><div class="menu-item-name">Mantı</div><div class="menu-item-desc">Ev yapımı, yoğurt sosu ve kırmızı biberli tereyağı</div></div><div class="menu-item-price price-tbd">eklenecek</div></div>
+      <div class="menu-item"><div><div class="menu-item-name">Pirohu</div><div class="menu-item-desc">Nane ve lor peyniri ile doldurulmuş, rendelenmiş hellimli</div></div><div class="menu-item-price price-tbd">eklenecek</div></div>
+      <div class="menu-item"><div><div class="menu-item-name">Hellim Böreği</div><div class="menu-item-desc">10 adet hellim dolgulu börek, bal ile</div></div><div class="menu-item-price price-tbd">eklenecek</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="galeri" style="background:var(--card); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="kicker">Kareler</p>
+      <h2>Galeri</h2>
+      <p>Gerçek fotoğraflarınız eline geçince buraya ekleyebiliriz — şimdilik temsili görseller var.</p>
+    </div>
+    <div class="gallery-grid">
+      <div><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" alt="Deniz kıyısı terası"></div>
+      <div><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500&q=80" alt="Sofra düzeni"></div>
+      <div><img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=500&q=80" alt="Servis edilen tabak"></div>
+      <div><img src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=500&q=80" alt="Tatlı ve kahve"></div>
+      <div><img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=500&q=80" alt="Deniz manzarası"></div>
+      <div><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=500&q=80" alt="Kahve servisi"></div>
+    </div>
+  </div>
+</section>
+
+<section class="reviews" id="yorumlar">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="kicker">Misafirlerimizden</p>
+      <h2>Yorumlar</h2>
+    </div>
+    <div class="review-grid">
+      <div class="review-card">
+        <p>Serpme kahvaltı harikaydı, deniz manzarası eşliğinde keyifli bir sabahtı.</p>
+        <span>★★★★★ — Ayşe K.</span>
+      </div>
+      <div class="review-card">
+        <p>Her tabakta ev sıcaklığı hissediliyor, kuzu incik özellikle unutulmazdı.</p>
+        <span>★★★★★ — Daniel R.</span>
+      </div>
+      <div class="review-card">
+        <p>Sakin bir atmosfer ve adanın en güzel Türk kahvesi — favori köşemiz.</p>
+        <span>★★★★★ — Mehmet Ö.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="iletisim">
+  <div class="wrap contact-grid">
+    <div>
+      <p class="kicker">Bize Ulaşın</p>
+      <h2 style="margin-bottom:28px;">Mel & Mer Café'yi Ziyaret Edin</h2>
+      <div class="contact-block">
+        <h3>Adres</h3>
+        <p>Ecevit Caddesi 62/A, Lefke, Kuzey Kıbrıs</p>
+      </div>
+      <div class="contact-block">
+        <h3>İletişim</h3>
+        <a href="tel:+905488680818">+90 548 868 0818</a>
+        <a href="mailto:melmercafe18@gmail.com">melmercafe18@gmail.com</a>
+      </div>
+      <div class="contact-block">
+        <h3>Çalışma Saatleri</h3>
+        <div class="hours-row"><span>Salı</span><span>Kapalı</span></div>
+        <div class="hours-row"><span>Diğer günler</span><span>09:00 – 19:00</span></div>
+        <div class="hours-row"><span>Mutfak</span><span>16:00'da kapanır</span></div>
+      </div>
+    </div>
+    <iframe class="map-frame" loading="lazy" src="https://www.google.com/maps?q=Mel+%26+Mer+Cafe+Lefke+North+Cyprus&output=embed" title="Konum haritası"></iframe>
+  </div>
+</section>
+
+<footer>
+  Mel & Mer Café · Ecevit Caddesi 62/A, Lefke, Kuzey Kıbrıs · © 2026 Tüm Hakları Saklıdır
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const tabs = document.querySelectorAll('.menu-tab');
+  const categories = document.querySelectorAll('.menu-category');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      categories.forEach(c => c.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.target).classList.add('active');
+    });
+  });
+
+  // ↓↓↓ Admin panelle aynı Supabase ayarlarını buraya da gir
+  const SUPABASE_URL = 'https://xakmxwmoxrbvpeykjcqf.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhha214d21veHJidnBleWtqY3FmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzOTY2NDAsImV4cCI6MjEwNDk3MjY0MH0.zXEzKluYX_g7Ypi7IcpvTinvjvA52uxDoOKYkPowB0A';
+
+  const CATEGORY_MAP = {
+    'Atıştırmalıklar': 'atistirmalik',
+    'Ana Yemekler': 'anayemek',
+    'Burger': 'burger',
+    'Hamur İşleri': 'hamurisi'
+  };
+
+  function escapeHtml(str){
+    const div = document.createElement('div');
+    div.textContent = str || '';
+    return div.innerHTML;
+  }
+
+  function renderMenuItem(item){
+    const hasPrice = item.price && item.price.trim().length > 0;
+    return `<div class="menu-item">
+      <div><div class="menu-item-name">${escapeHtml(item.name)}</div><div class="menu-item-desc">${escapeHtml(item.description)}</div></div>
+      <div class="menu-item-price ${hasPrice ? '' : 'price-tbd'}">${hasPrice ? escapeHtml(item.price) : 'eklenecek'}</div>
+    </div>`;
+  }
+
+  async function loadLiveMenu(){
+    // Ayarlar girilmediyse sayfadaki sabit (örnek) menüyü olduğu gibi bırak
+    if(SUPABASE_URL.includes('YOUR_') || SUPABASE_ANON_KEY.includes('YOUR_')) return;
+    try{
+      const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      const { data, error } = await supabase.from('menu_items').select('*').order('sort_order');
+      if(error || !data || !data.length) return;
+      Object.entries(CATEGORY_MAP).forEach(([label, id]) => {
+        const container = document.getElementById(id);
+        const items = data.filter(i => i.category === label);
+        if(container && items.length) container.innerHTML = items.map(renderMenuItem).join('');
+      });
+    }catch(e){
+      console.error('Menü yüklenemedi, sabit menü gösteriliyor:', e);
+    }
+  }
+  loadLiveMenu();
+</script>
+
+</body>
+</html>
