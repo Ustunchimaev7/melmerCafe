@@ -94,50 +94,44 @@
   .reserve-note{grid-column:1 / -1; font-size:0.82rem; color:var(--ink-soft);}
   @media (max-width:640px){ .reserve-form{grid-template-columns:1fr; padding:24px;} }
 
-  .story{background:var(--card); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
-  .story-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px; align-items:center;}
-  .story-grid img{border-radius:2px;}
-  .story-grid p{color:var(--ink-soft); margin-bottom:16px;}
-  .feature-list{display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:28px;}
-  .feature-list div{border-left:2px solid var(--sea); padding-left:14px;}
-  .feature-list h4{font-family:'Spectral', serif; font-size:1.05rem; margin-bottom:4px;}
-  .feature-list p{color:var(--ink-soft); font-size:0.92rem; margin:0;}
 
-  .menu-controls{display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; margin-bottom:32px;}
-  .menu-tabs{display:flex; gap:8px; flex-wrap:wrap;}
-  .menu-tab{padding:9px 20px; border:1.5px solid var(--line); border-radius:999px; font-weight:600; font-size:0.88rem; background:var(--surface); color:var(--ink-soft); cursor:pointer; transition:background .2s ease, color .2s ease, border-color .2s ease;}
-  .menu-tab.active, .menu-tab:hover{background:var(--deep-blue); border-color:var(--deep-blue); color:#fff;}
+  .menu-title-block{text-align:center; margin-bottom:8px;}
+  .menu-title{
+    font-size:3rem; font-weight:700; letter-spacing:0.04em; color:var(--terracotta);
+    margin-bottom:4px;
+  }
+  .menu-subtitle{color:var(--ink-soft); font-size:1.05rem; font-style:italic; margin-bottom:32px;}
+
+  .menu-controls{display:flex; justify-content:center; align-items:center; gap:20px; flex-wrap:wrap; margin-bottom:40px;}
+  .menu-tabs{display:flex; gap:8px; flex-wrap:wrap; justify-content:center;}
+  .menu-tab{padding:8px 18px; border:1.5px solid var(--line); border-radius:999px; font-weight:600; font-size:0.85rem; background:var(--surface); color:var(--ink-soft); cursor:pointer; transition:background .2s ease, color .2s ease, border-color .2s ease;}
+  .menu-tab:hover{background:var(--deep-blue); border-color:var(--deep-blue); color:#fff;}
   .menu-search{position:relative;}
   .menu-search input{padding:10px 16px 10px 38px; border:1.5px solid var(--line); border-radius:999px; background:var(--surface); color:var(--ink); font-family:inherit; font-size:0.9rem; width:220px; max-width:60vw;}
   .menu-search svg{position:absolute; left:14px; top:50%; transform:translateY(-50%); width:16px; height:16px; opacity:0.5;}
-  .menu-category{display:none; opacity:0; transition:opacity .25s ease;}
-  .menu-category.active{display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:16px;}
-  .menu-category.active.show{opacity:1;}
-  .menu-item{
-    display:flex; flex-direction:column; gap:10px; padding:20px;
-    background:var(--surface); border:1px solid var(--line); border-radius:14px;
-    transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+
+  .menu-columns{column-count:2; column-gap:64px;}
+  .menu-cat-block{break-inside:avoid-column; margin-bottom:40px;}
+  .menu-cat-title{
+    text-align:center; text-transform:uppercase; font-weight:700; font-size:1.15rem;
+    letter-spacing:0.06em; color:var(--ink); margin-bottom:6px; line-height:1.3;
   }
-  .menu-item.hidden{display:none;}
-  .menu-item-top{display:flex; justify-content:space-between; align-items:flex-start; gap:12px;}
-  .menu-item-name{font-weight:700; font-size:1.02rem; letter-spacing:-0.01em;}
-  .menu-item-desc{color:var(--ink-soft); font-size:0.88rem; line-height:1.5;}
-  .menu-item-price{font-weight:700; color:var(--terracotta); white-space:nowrap; font-size:0.95rem;}
+  .menu-cat-ornament{text-align:center; color:var(--terracotta); font-size:0.8rem; margin-bottom:18px; letter-spacing:0.3em;}
+  .menu-row{break-inside:avoid; margin-bottom:16px;}
+  .menu-row-top{display:flex; align-items:baseline; gap:8px;}
+  .menu-row-name{font-weight:700; font-size:0.98rem; white-space:nowrap;}
+  .menu-row-leader{flex:1; border-bottom:1px dotted var(--line); transform:translateY(-4px);}
+  .menu-row-price{font-weight:700; color:var(--terracotta); white-space:nowrap; font-size:0.92rem;}
+  .menu-row-desc{color:var(--ink-soft); font-size:0.82rem; font-style:italic; margin-top:2px; line-height:1.4;}
   .price-tbd{color:#B7A98C; font-size:0.78rem; font-style:italic; font-weight:500;}
-  .no-results{color:var(--ink-soft); font-style:italic; padding:20px 0; display:none;}
+  .no-results{color:var(--ink-soft); font-style:italic; padding:20px 0; display:none; text-align:center;}
+  .menu-row.hidden{display:none;}
 
   .gallery-grid{display:grid; grid-template-columns:repeat(4, 1fr); grid-auto-rows:180px; gap:12px;}
   .gallery-grid img{width:100%; height:100%; object-fit:cover;}
   .gallery-grid > *:nth-child(1){grid-column:span 2; grid-row:span 2;}
   .gallery-grid > *:nth-child(4){grid-row:span 2;}
 
-  .reviews{background:var(--deep-blue); color:var(--whitewash);}
-  .reviews .section-head p{color:#B9CBCF;}
-  .reviews .kicker{color:#E8B98A;}
-  .review-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
-  .review-card{background:rgba(255,255,255,0.06); padding:26px; border-left:3px solid var(--terracotta);}
-  .review-card p{font-style:italic; margin-bottom:14px; color:#E8E0CB;}
-  .review-card span{font-size:0.85rem; color:#9FB8BD;}
 
   .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px;}
   .contact-block{margin-bottom:26px;}
@@ -174,13 +168,13 @@
   @media (max-width: 860px){
     nav{display:none;}
     .hero-copy h1{font-size:2.2rem;}
-    .story-grid, .contact-grid{grid-template-columns:1fr;}
-    .menu-category.active{grid-template-columns:1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+    .menu-columns{column-count:1;}
+    .menu-title{font-size:2.2rem;}
     .stats .wrap{justify-content:flex-start;}
-    .review-grid{grid-template-columns:1fr;}
     .gallery-grid{grid-template-columns:repeat(2,1fr);}
     .gallery-grid > *:nth-child(1){grid-column:span 2;}
-    .menu-controls{flex-direction:column; align-items:flex-start;}
+    .menu-controls{flex-direction:column; align-items:center;}
   }
   :focus-visible{outline:3px solid var(--terracotta); outline-offset:2px;}
 
@@ -193,12 +187,10 @@
   .btn-primary:hover{transform:translateY(-2px); box-shadow:0 6px 16px rgba(193,96,42,0.35);}
   .btn-secondary{transition:background .2s ease, color .2s ease;}
   .btn-secondary:hover{background:#fff; color:var(--deep-blue);}
-  .review-card{transition:transform .25s ease, background .25s ease;}
-  .review-card:hover{transform:translateY(-4px); background:rgba(255,255,255,0.1);}
   .gallery-grid > div{overflow:hidden;}
   .gallery-grid img{transition:transform .4s ease;}
   .gallery-grid > div:hover img{transform:scale(1.06);}
-  .menu-item:hover{transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.08); border-color:var(--terracotta);}
+  .menu-row-top:hover .menu-row-name{color:var(--terracotta);}
 
   @media (prefers-reduced-motion: reduce){
     *{transition:none !important;}
@@ -216,7 +208,6 @@
         <li><a href="#menu" data-tr="Menü" data-en="Menu">Menü</a></li>
         <li><a href="#rezervasyon" data-tr="Rezervasyon" data-en="Reserve">Rezervasyon</a></li>
         <li><a href="#galeri" data-tr="Galeri" data-en="Gallery">Galeri</a></li>
-        <li><a href="#yorumlar" data-tr="Yorumlar" data-en="Reviews">Yorumlar</a></li>
         <li><a href="#iletisim" data-tr="Bize Ulaşın" data-en="Contact">Bize Ulaşın</a></li>
       </ul>
     </nav>
@@ -256,10 +247,9 @@
 
 <section id="menu">
   <div class="wrap">
-    <div class="section-head reveal">
-      <p class="kicker">À la Carte</p>
-      <h2 data-tr="Menü" data-en="Menu">Menü</h2>
-      <p data-tr="Ev yapımı lezzetler, günlük taze malzemelerle hazırlanır." data-en="Homemade dishes, prepared fresh every day.">Ev yapımı lezzetler, günlük taze malzemelerle hazırlanır.</p>
+    <div class="menu-title-block reveal">
+      <h2 class="menu-title" data-tr="Menü" data-en="Menu">Menü</h2>
+      <p class="menu-subtitle">Mel & Mer Café</p>
     </div>
 
     <div class="menu-controls">
@@ -270,7 +260,7 @@
       </div>
     </div>
 
-    <div id="menu-content">
+    <div class="menu-columns" id="menu-content">
       <p id="menu-loading" data-tr="Menü yükleniyor…" data-en="Loading menu…">Menü yükleniyor…</p>
     </div>
     <p class="no-results" id="no-results" data-tr="Aramanla eşleşen ürün bulunamadı." data-en="No dishes match your search.">Aramanla eşleşen ürün bulunamadı.</p>
@@ -328,20 +318,6 @@
       <div><img src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=500&q=80" alt="Tatlı ve kahve" loading="lazy"></div>
       <div><img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=500&q=80" alt="Deniz manzarası" loading="lazy"></div>
       <div><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=500&q=80" alt="Kahve servisi" loading="lazy"></div>
-    </div>
-  </div>
-</section>
-
-<section class="reviews" id="yorumlar">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <p class="kicker" data-tr="Misafirlerimizden" data-en="From our guests">Misafirlerimizden</p>
-      <h2 data-tr="Yorumlar" data-en="Reviews">Yorumlar</h2>
-    </div>
-    <div class="review-grid reveal">
-      <div class="review-card"><p data-tr="Serpme kahvaltı harikaydı, deniz manzarası eşliğinde keyifli bir sabahtı." data-en="The breakfast spread was wonderful, a lovely morning with a sea view.">Serpme kahvaltı harikaydı, deniz manzarası eşliğinde keyifli bir sabahtı.</p><span>★★★★★ — Ayşe K.</span></div>
-      <div class="review-card"><p data-tr="Her tabakta ev sıcaklığı hissediliyor, kuzu incik özellikle unutulmazdı." data-en="Every dish feels homemade, the lamb shank was especially unforgettable.">Her tabakta ev sıcaklığı hissediliyor, kuzu incik özellikle unutulmazdı.</p><span>★★★★★ — Daniel R.</span></div>
-      <div class="review-card"><p data-tr="Sakin bir atmosfer ve adanın en güzel Türk kahvesi — favori köşemiz." data-en="A calm atmosphere and the island's best Turkish coffee — our favourite spot.">Sakin bir atmosfer ve adanın en güzel Türk kahvesi — favori köşemiz.</p><span>★★★★★ — Mehmet Ö.</span></div>
     </div>
   </div>
 </section>
@@ -438,12 +414,13 @@
     const name = (currentLang === 'en' && item.name_en) ? item.name_en : item.name;
     const desc = (currentLang === 'en' && item.description_en) ? item.description_en : item.description;
     const tbdLabel = currentLang === 'en' ? 'TBD' : 'eklenecek';
-    return `<div class="menu-item">
-      <div class="menu-item-top">
-        <div class="menu-item-name">${escapeHtml(name)}</div>
-        <div class="menu-item-price ${hasPrice ? '' : 'price-tbd'}">${hasPrice ? escapeHtml(item.price) : tbdLabel}</div>
+    return `<div class="menu-row">
+      <div class="menu-row-top">
+        <span class="menu-row-name">${escapeHtml(name)}</span>
+        <span class="menu-row-leader"></span>
+        <span class="menu-row-price ${hasPrice ? '' : 'price-tbd'}">${hasPrice ? escapeHtml(item.price) : tbdLabel}</span>
       </div>
-      ${desc ? `<div class="menu-item-desc">${escapeHtml(desc)}</div>` : ''}
+      ${desc ? `<div class="menu-row-desc">${escapeHtml(desc)}</div>` : ''}
     </div>`;
   }
 
@@ -451,25 +428,28 @@
     const tabsContainer = document.getElementById('menu-tabs');
     tabsContainer.innerHTML = categoriesData.map(cat => {
       const label = (currentLang === 'en' && cat.name_en) ? cat.name_en : cat.name_tr;
-      const activeClass = cat.id === activeCategoryId ? 'active' : '';
-      return `<button class="menu-tab ${activeClass}" data-cat-id="${cat.id}">${escapeHtml(label)}</button>`;
+      return `<button class="menu-tab" data-cat-id="${cat.id}">${escapeHtml(label)}</button>`;
     }).join('');
     tabsContainer.querySelectorAll('.menu-tab').forEach(btn => {
       btn.addEventListener('click', () => {
-        activeCategoryId = btn.dataset.catId;
-        document.getElementById('menu-search-input').value = '';
-        renderTabs();
-        renderMenuContent();
+        const target = document.getElementById('cat-' + btn.dataset.catId);
+        if(target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
   }
 
-  function renderMenuContent(){
+  function renderMenuColumns(){
     const container = document.getElementById('menu-content');
-    const cat = categoriesData.find(c => c.id === activeCategoryId);
-    if(!cat){ container.innerHTML = ''; return; }
-    const items = menuItemsData.filter(i => i.category === cat.name_tr);
-    container.innerHTML = `<div class="menu-category active show">${items.map(renderMenuItem).join('')}</div>`;
+    container.innerHTML = categoriesData.map(cat => {
+      const label = (currentLang === 'en' && cat.name_en) ? cat.name_en : cat.name_tr;
+      const items = menuItemsData.filter(i => i.category === cat.name_tr);
+      if(!items.length) return '';
+      return `<div class="menu-cat-block" id="cat-${cat.id}">
+        <h3 class="menu-cat-title">${escapeHtml(label)}</h3>
+        <div class="menu-cat-ornament">✦ ✦ ✦</div>
+        ${items.map(renderMenuItem).join('')}
+      </div>`;
+    }).join('');
     filterMenu(document.getElementById('menu-search-input').value);
   }
 
@@ -479,9 +459,8 @@
         `<p id="menu-loading" data-tr="Menü yüklenemedi, lütfen sayfayı yenileyin." data-en="Menu could not be loaded, please refresh.">Menü yüklenemedi, lütfen sayfayı yenileyin.</p>`;
       return;
     }
-    if(!activeCategoryId) activeCategoryId = categoriesData[0].id;
     renderTabs();
-    renderMenuContent();
+    renderMenuColumns();
   }
 
   async function loadMenu(){
@@ -514,16 +493,20 @@
   }, { threshold: 0.15 });
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-  /* ---------- Menüde arama ---------- */
+  /* ---------- Menüde arama (tüm kategorilerde) ---------- */
   function filterMenu(query){
     const q = query.trim().toLocaleLowerCase('tr');
-    let anyVisible = false;
-    document.querySelectorAll('.menu-category.active .menu-item').forEach(item => {
-      const text = item.textContent.toLocaleLowerCase('tr');
-      const match = q === '' || text.includes(q);
-      item.classList.toggle('hidden', !match);
-      if(match) anyVisible = true;
+    document.querySelectorAll('.menu-cat-block').forEach(block => {
+      let anyVisibleInBlock = false;
+      block.querySelectorAll('.menu-row').forEach(row => {
+        const text = row.textContent.toLocaleLowerCase('tr');
+        const match = q === '' || text.includes(q);
+        row.classList.toggle('hidden', !match);
+        if(match) anyVisibleInBlock = true;
+      });
+      block.style.display = anyVisibleInBlock ? '' : 'none';
     });
+    const anyVisible = [...document.querySelectorAll('.menu-cat-block')].some(b => b.style.display !== 'none');
     document.getElementById('no-results').style.display = (q !== '' && !anyVisible) ? 'block' : 'none';
   }
   document.getElementById('menu-search-input').addEventListener('input', e => filterMenu(e.target.value));
