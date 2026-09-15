@@ -51,10 +51,10 @@
   .lang-btn.active{background:var(--deep-blue); color:#fff;}
   .header-cta{background:var(--deep-blue); color:var(--whitewash); padding:10px 20px; font-weight:600; font-size:0.9rem; white-space:nowrap;}
 
-  .hero{position:relative; height:88vh; min-height:560px; overflow:hidden;}
+  .hero{position:relative; height:56vh; min-height:420px; overflow:hidden;}
   .hero img{width:100%; height:100%; object-fit:cover;}
   .hero::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(31,75,92,0.15) 0%, rgba(20,30,34,0.55) 100%);}
-  .hero-copy{position:absolute; left:0; right:0; bottom:64px; z-index:2; color:#fff;}
+  .hero-copy{position:absolute; left:0; right:0; bottom:40px; z-index:2; color:#fff;}
   .hero-copy .wrap{max-width:1100px;}
   .hero-kicker{font-size:0.95rem; font-weight:600; margin-bottom:14px; color:#E8E0CB;}
   .hero-copy h1{font-size:3rem; max-width:14ch; margin-bottom:18px; color:#fff;}
@@ -103,22 +103,27 @@
   .feature-list h4{font-family:'Spectral', serif; font-size:1.05rem; margin-bottom:4px;}
   .feature-list p{color:var(--ink-soft); font-size:0.92rem; margin:0;}
 
-  .menu-controls{display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; margin-bottom:36px;}
-  .menu-tabs{display:flex; gap:10px; flex-wrap:wrap;}
-  .menu-tab{padding:9px 18px; border:1.5px solid var(--deep-blue); font-weight:600; font-size:0.9rem; background:transparent; color:var(--deep-blue); cursor:pointer; transition:background .2s ease, color .2s ease;}
-  .menu-tab.active, .menu-tab:hover{background:var(--deep-blue); color:#fff;}
+  .menu-controls{display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; margin-bottom:32px;}
+  .menu-tabs{display:flex; gap:8px; flex-wrap:wrap;}
+  .menu-tab{padding:9px 20px; border:1.5px solid var(--line); border-radius:999px; font-weight:600; font-size:0.88rem; background:var(--surface); color:var(--ink-soft); cursor:pointer; transition:background .2s ease, color .2s ease, border-color .2s ease;}
+  .menu-tab.active, .menu-tab:hover{background:var(--deep-blue); border-color:var(--deep-blue); color:#fff;}
   .menu-search{position:relative;}
-  .menu-search input{padding:10px 16px 10px 38px; border:1.5px solid var(--line); background:var(--surface); color:var(--ink); font-family:inherit; font-size:0.9rem; width:220px; max-width:60vw;}
-  .menu-search svg{position:absolute; left:12px; top:50%; transform:translateY(-50%); width:16px; height:16px; opacity:0.5;}
+  .menu-search input{padding:10px 16px 10px 38px; border:1.5px solid var(--line); border-radius:999px; background:var(--surface); color:var(--ink); font-family:inherit; font-size:0.9rem; width:220px; max-width:60vw;}
+  .menu-search svg{position:absolute; left:14px; top:50%; transform:translateY(-50%); width:16px; height:16px; opacity:0.5;}
   .menu-category{display:none; opacity:0; transition:opacity .25s ease;}
-  .menu-category.active{display:grid; grid-template-columns:1fr 1fr; gap:0 48px;}
+  .menu-category.active{display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:16px;}
   .menu-category.active.show{opacity:1;}
-  .menu-item{display:flex; justify-content:space-between; gap:16px; padding:18px 0; border-bottom:1px dashed var(--line); transition:opacity .2s ease;}
+  .menu-item{
+    display:flex; flex-direction:column; gap:10px; padding:20px;
+    background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+  }
   .menu-item.hidden{display:none;}
-  .menu-item-name{font-family:'Spectral', serif; font-weight:600; font-size:1.08rem; margin-bottom:4px;}
-  .menu-item-desc{color:var(--ink-soft); font-size:0.9rem;}
-  .menu-item-price{font-family:'Spectral', serif; font-weight:600; color:var(--terracotta); white-space:nowrap;}
-  .price-tbd{color:#B7A98C; font-size:0.8rem; font-style:italic;}
+  .menu-item-top{display:flex; justify-content:space-between; align-items:flex-start; gap:12px;}
+  .menu-item-name{font-weight:700; font-size:1.02rem; letter-spacing:-0.01em;}
+  .menu-item-desc{color:var(--ink-soft); font-size:0.88rem; line-height:1.5;}
+  .menu-item-price{font-weight:700; color:var(--terracotta); white-space:nowrap; font-size:0.95rem;}
+  .price-tbd{color:#B7A98C; font-size:0.78rem; font-style:italic; font-weight:500;}
   .no-results{color:var(--ink-soft); font-style:italic; padding:20px 0; display:none;}
 
   .gallery-grid{display:grid; grid-template-columns:repeat(4, 1fr); grid-auto-rows:180px; gap:12px;}
@@ -193,11 +198,7 @@
   .gallery-grid > div{overflow:hidden;}
   .gallery-grid img{transition:transform .4s ease;}
   .gallery-grid > div:hover img{transform:scale(1.06);}
-  .feature-list div{transition:border-color .2s ease, transform .2s ease;}
-  .feature-list div:hover{border-color:var(--terracotta); transform:translateX(4px);}
-  .menu-item{transition:background .2s ease;}
-  .menu-item:hover{background:rgba(0,0,0,0.02);}
-  @media (prefers-color-scheme: dark){ .menu-item:hover{background:rgba(255,255,255,0.03);} }
+  .menu-item:hover{transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.08); border-color:var(--terracotta);}
 
   @media (prefers-reduced-motion: reduce){
     *{transition:none !important;}
@@ -212,7 +213,6 @@
     <a href="#" class="logo">Mel <span>&</span> Mer</a>
     <nav>
       <ul>
-        <li><a href="#hikaye" data-tr="Hikâye" data-en="Story">Hikâye</a></li>
         <li><a href="#menu" data-tr="Menü" data-en="Menu">Menü</a></li>
         <li><a href="#rezervasyon" data-tr="Rezervasyon" data-en="Reserve">Rezervasyon</a></li>
         <li><a href="#galeri" data-tr="Galeri" data-en="Gallery">Galeri</a></li>
@@ -253,24 +253,6 @@
     <div><strong data-tr="Aile işletmesi" data-en="Family-run">Aile işletmesi</strong><span data-tr="İlk günden bu yana" data-en="Since day one">İlk günden bu yana</span></div>
   </div>
 </div>
-
-<section class="story" id="hikaye">
-  <div class="wrap story-grid reveal">
-    <img src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=700&q=80" alt="Kafe mutfağında hazırlık" loading="lazy">
-    <div>
-      <p class="kicker" data-tr="Hikâyemiz" data-en="Our Story">Hikâyemiz</p>
-      <h2 data-tr="Akdeniz kıyısında bir aile sofrası" data-en="A family table by the Mediterranean">Akdeniz kıyısında bir aile sofrası</h2>
-      <p data-tr="Mel & Mer, 2018'de denize bakan küçük bir aile sofrası olarak başladı. Komşular misafir, misafirler zamanla aile oldu." data-en="Mel & Mer began in 2018 as a small family table overlooking the sea. Neighbours became guests, and guests slowly became family.">Mel & Mer, 2018'de denize bakan küçük bir aile sofrası olarak başladı. Komşular misafir, misafirler zamanla aile oldu.</p>
-      <p data-tr="Serpme kahvaltıdan akşamın soğuk birasına, her şey büyürken yediğimiz tariflerle, aynı özenle hazırlanıyor." data-en="From breakfast spreads to a cold beer at sunset, everything is still made with the same recipes and the same care we grew up with.">Serpme kahvaltıdan akşamın soğuk birasına, her şey büyürken yediğimiz tariflerle, aynı özenle hazırlanıyor.</p>
-      <div class="feature-list">
-        <div><h4 data-tr="Deniz Manzaralı Teras" data-en="Sea-View Terrace">Deniz Manzaralı Teras</h4><p data-tr="Her masadan Akdeniz görünür." data-en="Every table looks out over the Mediterranean.">Her masadan Akdeniz görünür.</p></div>
-        <div><h4 data-tr="Günlük Taze" data-en="Fresh Daily">Günlük Taze</h4><p data-tr="Yerel üreticilerden tedarik ediyoruz." data-en="Sourced daily from local producers.">Yerel üreticilerden tedarik ediyoruz.</p></div>
-        <div><h4 data-tr="Aile İşletmesi" data-en="Family Owned">Aile İşletmesi</h4><p data-tr="İlk günden bu yana Mel & Mer ailesi işletiyor." data-en="Run by the Mel & Mer family since day one.">İlk günden bu yana Mel & Mer ailesi işletiyor.</p></div>
-        <div><h4 data-tr="Geniş Mutfak" data-en="Diverse Kitchen">Geniş Mutfak</h4><p data-tr="Türk, Kıbrıs ve dünya mutfağından seçkiler." data-en="A selection from Turkish, Cypriot and world cuisine.">Türk, Kıbrıs ve dünya mutfağından seçkiler.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <section id="menu">
   <div class="wrap">
@@ -457,8 +439,11 @@
     const desc = (currentLang === 'en' && item.description_en) ? item.description_en : item.description;
     const tbdLabel = currentLang === 'en' ? 'TBD' : 'eklenecek';
     return `<div class="menu-item">
-      <div><div class="menu-item-name">${escapeHtml(name)}</div><div class="menu-item-desc">${escapeHtml(desc)}</div></div>
-      <div class="menu-item-price ${hasPrice ? '' : 'price-tbd'}">${hasPrice ? escapeHtml(item.price) : tbdLabel}</div>
+      <div class="menu-item-top">
+        <div class="menu-item-name">${escapeHtml(name)}</div>
+        <div class="menu-item-price ${hasPrice ? '' : 'price-tbd'}">${hasPrice ? escapeHtml(item.price) : tbdLabel}</div>
+      </div>
+      ${desc ? `<div class="menu-item-desc">${escapeHtml(desc)}</div>` : ''}
     </div>`;
   }
 
