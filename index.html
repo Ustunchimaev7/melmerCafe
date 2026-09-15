@@ -60,6 +60,21 @@
   .lang-btn.active{background:var(--deep-blue); color:#fff;}
   .header-cta{background:var(--deep-blue); color:var(--whitewash); padding:10px 20px; font-weight:600; font-size:0.9rem; white-space:nowrap;}
 
+  .hamburger-btn{
+    display:none; flex-direction:column; justify-content:center; gap:5px;
+    width:44px; height:44px; padding:0; background:none; border:none; cursor:pointer;
+  }
+  .hamburger-btn span{display:block; width:22px; height:2px; background:var(--ink); margin:0 auto; transition:transform .25s ease, opacity .25s ease;}
+  .hamburger-btn[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .hamburger-btn[aria-expanded="true"] span:nth-child(2){opacity:0;}
+  .hamburger-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  .mobile-nav{display:none; max-height:0; overflow:hidden; transition:max-height .3s ease; background:var(--whitewash); border-top:1px solid var(--line);}
+  .mobile-nav.open{max-height:340px;}
+  .mobile-nav ul{display:flex; flex-direction:column;}
+  .mobile-nav a{display:block; padding:18px 28px; font-size:1.05rem; font-weight:600; color:var(--ink); border-bottom:1px solid var(--line);}
+  .mobile-nav a:active{background:var(--card);}
+
   .hero{position:relative; height:56vh; min-height:420px; overflow:hidden;}
   .hero img{width:100%; height:100%; object-fit:cover;}
   .hero::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(31,75,92,0.15) 0%, rgba(20,30,34,0.55) 100%);}
@@ -187,7 +202,9 @@
   }
 
   @media (max-width: 860px){
-    nav{display:none;}
+    #desktop-nav{display:none;}
+    .hamburger-btn{display:flex;}
+    .mobile-nav{display:block;}
     .hero-copy h1{font-size:2.2rem;}
     .contact-grid{grid-template-columns:1fr;}
     .menu-columns{column-count:1;}
@@ -196,6 +213,18 @@
     .gallery-grid{grid-template-columns:repeat(2,1fr);}
     .gallery-grid > *:nth-child(1){grid-column:span 2;}
     .menu-controls{flex-direction:column; align-items:center;}
+
+    /* Dokunma alanlarını büyüt */
+    .menu-tab{padding:10px 6px 16px; font-size:1.05rem;}
+    .menu-tabs{gap:22px; width:100%; overflow-x:auto; justify-content:flex-start; padding:0 4px 0 0; -webkit-overflow-scrolling:touch;}
+    .lang-btn{padding:9px 15px; min-width:44px;}
+    .header-cta{padding:12px 18px; font-size:0.95rem;}
+    .btn{padding:16px 24px; font-size:1rem; width:100%; text-align:center;}
+    .btn-row{flex-direction:column; width:100%;}
+    .reserve-form{grid-template-columns:1fr; padding:24px;}
+    .reserve-form input, .reserve-form select{padding:13px 14px; font-size:1rem;}
+    .menu-search input{width:100%; max-width:none;}
+    nav a, .mobile-nav a{min-height:44px;}
   }
   :focus-visible{outline:3px solid var(--terracotta); outline-offset:2px;}
 
@@ -224,7 +253,7 @@
 <header>
   <div class="header-inner">
     <a href="#" class="logo">Mel <span>&</span> Mer</a>
-    <nav>
+    <nav id="desktop-nav">
       <ul>
         <li><a href="#menu" data-tr="Menü" data-en="Menu">Menü</a></li>
         <li><a href="#rezervasyon" data-tr="Rezervasyon" data-en="Reserve">Rezervasyon</a></li>
@@ -238,8 +267,19 @@
         <button class="lang-btn" data-lang="en">EN</button>
       </div>
       <a class="header-cta" href="#rezervasyon" data-tr="Rezervasyon" data-en="Reserve">Rezervasyon</a>
+      <button class="hamburger-btn" id="hamburger-btn" aria-label="Menüyü aç" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
+  <nav id="mobile-nav" class="mobile-nav">
+    <ul>
+      <li><a href="#menu" data-tr="Menü" data-en="Menu">Menü</a></li>
+      <li><a href="#rezervasyon" data-tr="Rezervasyon" data-en="Reserve">Rezervasyon</a></li>
+      <li><a href="#galeri" data-tr="Galeri" data-en="Gallery">Galeri</a></li>
+      <li><a href="#iletisim" data-tr="Bize Ulaşın" data-en="Contact">Bize Ulaşın</a></li>
+    </ul>
+  </nav>
 </header>
 
 <section class="hero">
@@ -423,6 +463,20 @@
     btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
   });
   applyLanguage(currentLang);
+
+  /* ---------- Mobil hamburger menü ---------- */
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+  const mobileNav = document.getElementById('mobile-nav');
+  hamburgerBtn.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    hamburgerBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  mobileNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
 
   /* ---------- Rezervasyon formu ---------- */
   document.getElementById('reserve-form').addEventListener('submit', function(e){
