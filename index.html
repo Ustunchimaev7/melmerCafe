@@ -13,6 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=1600&q=80">
 <style>
   :root{
     --whitewash:#F7F3EA; --card:#EFE8D8; --ink:#21262B; --ink-soft:#4B5259;
@@ -219,43 +220,6 @@
   </div>
 </div>
 
-<section id="rezervasyon">
-  <div class="wrap">
-    <div class="section-head" style="margin-left:auto; margin-right:auto; text-align:center;">
-      <p class="kicker" data-tr="Rezervasyon" data-en="Reservation">Rezervasyon</p>
-      <h2 data-tr="Masanı Ayırt" data-en="Reserve a Table">Masanı Ayırt</h2>
-      <p data-tr="Formu doldur, WhatsApp'tan hazır mesajla bize ulaş — biz de en kısa sürede onaylayalım." data-en="Fill in the form and we'll get a ready message on WhatsApp — we'll confirm as soon as possible.">Formu doldur, WhatsApp'tan hazır mesajla bize ulaş — biz de en kısa sürede onaylayalım.</p>
-    </div>
-    <form class="reserve-form" id="reserve-form">
-      <div>
-        <label data-tr="Ad Soyad" data-en="Full Name">Ad Soyad</label>
-        <input type="text" id="res-name" required>
-      </div>
-      <div>
-        <label data-tr="Telefon" data-en="Phone">Telefon</label>
-        <input type="tel" id="res-phone" placeholder="+90 5xx xxx xx xx">
-      </div>
-      <div>
-        <label data-tr="Tarih" data-en="Date">Tarih</label>
-        <input type="date" id="res-date" required>
-      </div>
-      <div>
-        <label data-tr="Saat" data-en="Time">Saat</label>
-        <input type="time" id="res-time" required>
-      </div>
-      <div class="full">
-        <label data-tr="Kişi Sayısı" data-en="Number of Guests">Kişi Sayısı</label>
-        <select id="res-guests">
-          <option>1</option><option>2</option><option selected>3</option><option>4</option>
-          <option>5</option><option>6</option><option>7</option><option>8+</option>
-        </select>
-      </div>
-      <button type="submit" class="submit-btn" data-tr="WhatsApp'tan Gönder" data-en="Send via WhatsApp">WhatsApp'tan Gönder</button>
-      <p class="reserve-note" data-tr="Not: Rezervasyon bu formla otomatik onaylanmaz, WhatsApp'tan dönüş yapılır." data-en="Note: this form doesn't confirm the reservation automatically — we'll reply on WhatsApp.">Not: Rezervasyon bu formla otomatik onaylanmaz, WhatsApp'tan dönüş yapılır.</p>
-    </form>
-  </div>
-</section>
-
 <section class="story" id="hikaye">
   <div class="wrap story-grid">
     <img src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=700&q=80" alt="Kafe mutfağında hazırlık" loading="lazy">
@@ -325,6 +289,43 @@
       <div class="menu-item"><div><div class="menu-item-name" data-tr="Hellim Böreği" data-en="Halloumi Pastry">Hellim Böreği</div><div class="menu-item-desc" data-tr="10 adet hellim dolgulu börek, bal ile" data-en="10 pieces filled with halloumi, served with honey">10 adet hellim dolgulu börek, bal ile</div></div><div class="menu-item-price price-tbd" data-tr="eklenecek" data-en="TBD">eklenecek</div></div>
     </div>
     <p class="no-results" id="no-results" data-tr="Aramanla eşleşen ürün bulunamadı." data-en="No dishes match your search.">Aramanla eşleşen ürün bulunamadı.</p>
+  </div>
+</section>
+
+<section id="rezervasyon">
+  <div class="wrap">
+    <div class="section-head" style="margin-left:auto; margin-right:auto; text-align:center;">
+      <p class="kicker" data-tr="Rezervasyon" data-en="Reservation">Rezervasyon</p>
+      <h2 data-tr="Masanı Ayırt" data-en="Reserve a Table">Masanı Ayırt</h2>
+      <p data-tr="Formu doldur, WhatsApp'tan hazır mesajla bize ulaş — biz de en kısa sürede onaylayalım." data-en="Fill in the form and we'll get a ready message on WhatsApp — we'll confirm as soon as possible.">Formu doldur, WhatsApp'tan hazır mesajla bize ulaş — biz de en kısa sürede onaylayalım.</p>
+    </div>
+    <form class="reserve-form" id="reserve-form">
+      <div>
+        <label data-tr="Ad Soyad" data-en="Full Name">Ad Soyad</label>
+        <input type="text" id="res-name" required>
+      </div>
+      <div>
+        <label data-tr="Telefon" data-en="Phone">Telefon</label>
+        <input type="tel" id="res-phone" placeholder="+90 5xx xxx xx xx">
+      </div>
+      <div>
+        <label data-tr="Tarih" data-en="Date">Tarih</label>
+        <input type="date" id="res-date" required>
+      </div>
+      <div>
+        <label data-tr="Saat" data-en="Time">Saat</label>
+        <input type="time" id="res-time" required>
+      </div>
+      <div class="full">
+        <label data-tr="Kişi Sayısı" data-en="Number of Guests">Kişi Sayısı</label>
+        <select id="res-guests">
+          <option>1</option><option>2</option><option selected>3</option><option>4</option>
+          <option>5</option><option>6</option><option>7</option><option>8+</option>
+        </select>
+      </div>
+      <button type="submit" class="submit-btn" data-tr="WhatsApp'tan Gönder" data-en="Send via WhatsApp">WhatsApp'tan Gönder</button>
+      <p class="reserve-note" data-tr="Not: Rezervasyon bu formla otomatik onaylanmaz, WhatsApp'tan dönüş yapılır." data-en="Note: this form doesn't confirm the reservation automatically — we'll reply on WhatsApp.">Not: Rezervasyon bu formla otomatik onaylanmaz, WhatsApp'tan dönüş yapılır.</p>
+    </form>
   </div>
 </section>
 
