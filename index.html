@@ -102,10 +102,17 @@
   }
   .menu-subtitle{color:var(--ink-soft); font-size:1.05rem; font-style:italic; margin-bottom:32px;}
 
-  .menu-controls{display:flex; justify-content:center; align-items:center; gap:20px; flex-wrap:wrap; margin-bottom:40px;}
-  .menu-tabs{display:flex; gap:8px; flex-wrap:wrap; justify-content:center;}
-  .menu-tab{padding:8px 18px; border:1.5px solid var(--line); border-radius:999px; font-weight:600; font-size:0.85rem; background:var(--surface); color:var(--ink-soft); cursor:pointer; transition:background .2s ease, color .2s ease, border-color .2s ease;}
-  .menu-tab:hover{background:var(--deep-blue); border-color:var(--deep-blue); color:#fff;}
+  .menu-controls{display:flex; flex-direction:column; align-items:center; gap:22px; margin-bottom:44px;}
+  .menu-tabs{display:flex; gap:32px; flex-wrap:wrap; justify-content:center; border-bottom:1px solid var(--line); padding-bottom:0;}
+  .menu-tab{
+    padding:6px 2px 14px; border:none; background:none; cursor:pointer;
+    font-family:'Spectral', serif; font-style:italic; font-weight:500; font-size:1.02rem;
+    letter-spacing:0.02em; color:var(--ink-soft);
+    border-bottom:2px solid transparent; margin-bottom:-1px;
+    transition:color .2s ease, border-color .2s ease;
+  }
+  .menu-tab:hover{color:var(--ink);}
+  .menu-tab.active{color:var(--terracotta); border-color:var(--terracotta);}
   .menu-search{position:relative;}
   .menu-search input{padding:10px 16px 10px 38px; border:1.5px solid var(--line); border-radius:999px; background:var(--surface); color:var(--ink); font-family:inherit; font-size:0.9rem; width:220px; max-width:60vw;}
   .menu-search svg{position:absolute; left:14px; top:50%; transform:translateY(-50%); width:16px; height:16px; opacity:0.5;}
@@ -428,14 +435,24 @@
     const tabsContainer = document.getElementById('menu-tabs');
     tabsContainer.innerHTML = categoriesData.map(cat => {
       const label = (currentLang === 'en' && cat.name_en) ? cat.name_en : cat.name_tr;
-      return `<button class="menu-tab" data-cat-id="${cat.id}">${escapeHtml(label)}</button>`;
+      const activeClass = cat.id === activeCategoryId ? 'active' : '';
+      return `<button class="menu-tab ${activeClass}" data-cat-id="${cat.id}">${escapeHtml(label)}</button>`;
     }).join('');
     tabsContainer.querySelectorAll('.menu-tab').forEach(btn => {
       btn.addEventListener('click', () => {
-        const target = document.getElementById('cat-' + btn.dataset.catId);
-        if(target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        activeCategoryId = btn.dataset.catId;
+        document.getElementById('menu-search-input').value = '';
+        renderTabs();
+        showActiveCategory();
       });
     });
+  }
+
+  function showActiveCategory(){
+    document.querySelectorAll('.menu-cat-block').forEach(block => {
+      block.style.display = (block.id === 'cat-' + activeCategoryId) ? '' : 'none';
+    });
+    filterMenu(document.getElementById('menu-search-input').value);
   }
 
   function renderMenuColumns(){
@@ -459,8 +476,12 @@
         `<p id="menu-loading" data-tr="Menü yüklenemedi, lütfen sayfayı yenileyin." data-en="Menu could not be loaded, please refresh.">Menü yüklenemedi, lütfen sayfayı yenileyin.</p>`;
       return;
     }
+    if(!activeCategoryId || !categoriesData.some(c => c.id === activeCategoryId)){
+      activeCategoryId = categoriesData[0].id;
+    }
     renderTabs();
     renderMenuColumns();
+    showActiveCategory();
   }
 
   async function loadMenu(){
@@ -493,20 +514,18 @@
   }, { threshold: 0.15 });
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-  /* ---------- Menüde arama (tüm kategorilerde) ---------- */
+  /* ---------- Menüde arama (aktif kategori içinde) ---------- */
   function filterMenu(query){
     const q = query.trim().toLocaleLowerCase('tr');
-    document.querySelectorAll('.menu-cat-block').forEach(block => {
-      let anyVisibleInBlock = false;
-      block.querySelectorAll('.menu-row').forEach(row => {
-        const text = row.textContent.toLocaleLowerCase('tr');
-        const match = q === '' || text.includes(q);
-        row.classList.toggle('hidden', !match);
-        if(match) anyVisibleInBlock = true;
-      });
-      block.style.display = anyVisibleInBlock ? '' : 'none';
+    const activeBlock = document.getElementById('cat-' + activeCategoryId);
+    if(!activeBlock) return;
+    let anyVisible = false;
+    activeBlock.querySelectorAll('.menu-row').forEach(row => {
+      const text = row.textContent.toLocaleLowerCase('tr');
+      const match = q === '' || text.includes(q);
+      row.classList.toggle('hidden', !match);
+      if(match) anyVisible = true;
     });
-    const anyVisible = [...document.querySelectorAll('.menu-cat-block')].some(b => b.style.display !== 'none');
     document.getElementById('no-results').style.display = (q !== '' && !anyVisible) ? 'block' : 'none';
   }
   document.getElementById('menu-search-input').addEventListener('input', e => filterMenu(e.target.value));
