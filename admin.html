@@ -64,6 +64,18 @@
   }
   .add-form h2{font-size:1.15rem; margin-bottom:16px;}
   .add-form .row{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+
+  .cat-manager{background:#fff; border:1px solid var(--line); padding:24px; margin-bottom:36px;}
+  .cat-manager h2{font-size:1.15rem; margin-bottom:16px; color:var(--deep-blue);}
+  .cat-row{display:flex; align-items:center; gap:10px; padding:8px 0; border-bottom:1px solid var(--line);}
+  .cat-row input{margin:0; font-size:0.9rem;}
+  .cat-row .cat-name{flex:1.2;}
+  .cat-row .cat-name-en{flex:1.2;}
+  .cat-row .cat-order{width:60px; flex:none;}
+  .cat-row .cat-delete{background:transparent; color:#B3261E; padding:6px 10px; font-size:0.8rem; flex:none;}
+  .cat-add-row{display:flex; gap:10px; margin-top:14px;}
+  .cat-add-row input{margin:0;}
+  .cat-add-row button{background:var(--deep-blue); color:#fff; padding:10px 18px; flex:none;}
 </style>
 </head>
 <body>
@@ -89,6 +101,16 @@
     <button id="logout-btn">Çıkış Yap</button>
   </div>
   <div class="wrap">
+    <div class="cat-manager">
+      <h2>Kategoriler</h2>
+      <div id="category-list">Yükleniyor…</div>
+      <div class="cat-add-row">
+        <input type="text" id="new-cat-tr" placeholder="Yeni kategori (Türkçe) — örn. Kahvaltılıklar" style="flex:1.2;">
+        <input type="text" id="new-cat-en" placeholder="İngilizce (opsiyonel) — örn. Breakfast" style="flex:1.2;">
+        <button id="add-cat-btn">Kategori Ekle</button>
+      </div>
+    </div>
+
     <div id="menu-list">Yükleniyor…</div>
 
     <div class="add-form">
@@ -96,12 +118,7 @@
       <div class="row">
         <div>
           <label>Kategori</label>
-          <select id="new-category">
-            <option>Atıştırmalıklar</option>
-            <option>Ana Yemekler</option>
-            <option>Burger</option>
-            <option>Hamur İşleri</option>
-          </select>
+          <select id="new-category"></select>
         </div>
         <div>
           <label>Fiyat</label>
@@ -157,6 +174,7 @@
   function showDashboard(){
     loginScreen.style.display = 'none';
     dashboard.style.display = 'block';
+    loadCategories();
     loadItems();
   }
 
@@ -165,6 +183,71 @@
     div.textContent = str || '';
     return div.innerHTML;
   }
+
+  /* ---------- Kategoriler ---------- */
+  let categoriesCache = [];
+
+  async function loadCategories(){
+    const { data, error } = await supabaseClient.from('categories').select('*').order('sort_order');
+    const listEl = document.getElementById('category-list');
+    const selectEl = document.getElementById('new-category');
+    if(error){
+      listEl.innerHTML = '<p style="color:#B3261E;">Kategoriler yüklenemedi: ' + escapeHtml(error.message) + '</p>';
+      return;
+    }
+    categoriesCache = data || [];
+    listEl.innerHTML = categoriesCache.map(cat => `
+      <div class="cat-row" data-cat-id="${cat.id}">
+        <input class="cat-name" type="text" value="${escapeHtml(cat.name_tr)}" id="cat-tr-${cat.id}" placeholder="Türkçe isim">
+        <input class="cat-name-en" type="text" value="${escapeHtml(cat.name_en || '')}" id="cat-en-${cat.id}" placeholder="İngilizce isim">
+        <input class="cat-order" type="number" value="${cat.sort_order || 0}" id="cat-order-${cat.id}" title="Sıra">
+        <button class="save-btn" data-cat-save="${cat.id}">Kaydet</button>
+        <span class="saved-tag" id="cat-saved-${cat.id}">✓ kaydedildi</span>
+        <button class="cat-delete" data-cat-delete="${cat.id}">Sil</button>
+      </div>
+    `).join('');
+    selectEl.innerHTML = categoriesCache.map(cat => `<option value="${escapeHtml(cat.name_tr)}">${escapeHtml(cat.name_tr)}</option>`).join('');
+
+    listEl.querySelectorAll('[data-cat-save]').forEach(btn => {
+      btn.addEventListener('click', () => saveCategory(btn.dataset.catSave));
+    });
+    listEl.querySelectorAll('[data-cat-delete]').forEach(btn => {
+      btn.addEventListener('click', () => deleteCategory(btn.dataset.catDelete));
+    });
+  }
+
+  async function saveCategory(id){
+    const name_tr = document.getElementById('cat-tr-' + id).value.trim();
+    const name_en = document.getElementById('cat-en-' + id).value.trim();
+    const sort_order = parseInt(document.getElementById('cat-order-' + id).value, 10) || 0;
+    if(!name_tr){ alert('Kategori adı boş olamaz.'); return; }
+    const { error } = await supabaseClient.from('categories').update({ name_tr, name_en, sort_order }).eq('id', id);
+    if(error){ alert('Kaydedilemedi: ' + error.message); return; }
+    const tag = document.getElementById('cat-saved-' + id);
+    tag.style.display = 'inline';
+    setTimeout(() => tag.style.display = 'none', 1800);
+    loadCategories();
+    loadItems();
+  }
+
+  async function deleteCategory(id){
+    if(!confirm('Bu kategoriyi silmek istediğine emin misin? İçindeki ürünler görünmez hale gelir (silinmez, ama kategorisiz kalır).')) return;
+    const { error } = await supabaseClient.from('categories').delete().eq('id', id);
+    if(error){ alert('Silinemedi: ' + error.message); return; }
+    loadCategories();
+  }
+
+  document.getElementById('add-cat-btn').addEventListener('click', async () => {
+    const name_tr = document.getElementById('new-cat-tr').value.trim();
+    const name_en = document.getElementById('new-cat-en').value.trim();
+    if(!name_tr){ alert('Kategori adı gerekli.'); return; }
+    const sort_order = categoriesCache.length ? Math.max(...categoriesCache.map(c => c.sort_order || 0)) + 1 : 1;
+    const { error } = await supabaseClient.from('categories').insert({ name_tr, name_en, sort_order });
+    if(error){ alert('Eklenemedi: ' + error.message); return; }
+    document.getElementById('new-cat-tr').value = '';
+    document.getElementById('new-cat-en').value = '';
+    loadCategories();
+  });
 
   async function loadItems(){
     const { data, error } = await supabaseClient.from('menu_items').select('*').order('category').order('sort_order');
