@@ -114,6 +114,29 @@
 
   footer{background:var(--ink); color:#9AA3A8; text-align:center; padding:32px 28px; font-size:0.85rem;}
 
+  .whatsapp-float{
+    position:fixed; bottom:24px; right:24px; z-index:100;
+    width:58px; height:58px; border-radius:50%;
+    background:#25D366; display:flex; align-items:center; justify-content:center;
+    box-shadow:0 4px 14px rgba(0,0,0,0.3);
+    transition:transform .2s ease;
+  }
+  .whatsapp-float:hover{transform:scale(1.08);}
+  .whatsapp-float svg{width:30px; height:30px;}
+  .whatsapp-float::before{
+    content:""; position:absolute; inset:0; border-radius:50%;
+    background:#25D366; opacity:0.5;
+    animation:wa-pulse 2.2s ease-out infinite;
+  }
+  @keyframes wa-pulse{
+    0%{transform:scale(1); opacity:0.5;}
+    100%{transform:scale(1.6); opacity:0;}
+  }
+  @media (prefers-reduced-motion: reduce){ .whatsapp-float::before{ animation:none; } }
+  @media (max-width:860px){
+    .whatsapp-float{ bottom:18px; right:18px; width:52px; height:52px; }
+  }
+
   @media (max-width: 860px){
     nav{display:none;}
     .hero-copy h1{font-size:2.2rem;}
@@ -310,6 +333,10 @@
   Mel & Mer Café · Ecevit Caddesi 62/A, Lefke, <span data-tr="Kuzey Kıbrıs" data-en="North Cyprus">Kuzey Kıbrıs</span> · © 2026
 </footer>
 
+<a href="https://wa.me/905488680818" target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp'tan yaz" title="WhatsApp'tan yaz">
+  <svg viewBox="0 0 32 32" fill="white"><path d="M16.004 3C9.377 3 4 8.377 4 15.004c0 2.65.86 5.1 2.32 7.09L4.6 28.2l6.28-1.65a11.93 11.93 0 0 0 5.12 1.16h.004c6.627 0 12.004-5.377 12.004-12.004C28 8.377 22.63 3 16.004 3Zm7.03 17.17c-.293.826-1.65 1.58-2.28 1.674-.582.086-1.313.122-2.117-.133-.487-.155-1.116-.362-1.92-.71-3.378-1.463-5.58-4.86-5.75-5.086-.168-.226-1.375-1.83-1.375-3.49 0-1.66.87-2.475 1.18-2.813.31-.338.674-.422.898-.422.225 0 .45.002.646.012.207.01.485-.078.76.582.293.7.994 2.415 1.082 2.59.09.176.15.383.03.61-.12.226-.18.366-.36.564-.18.198-.378.442-.54.594-.18.17-.368.354-.158.694.21.34.933 1.542 2.005 2.498 1.377 1.228 2.538 1.61 2.878 1.79.34.18.538.15.736-.09.198-.24.85-.99 1.078-1.33.226-.34.452-.283.762-.17.31.113 1.97.93 2.307 1.098.34.17.564.254.648.396.084.14.084.812-.21 1.638Z"/></svg>
+</a>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   /* ---------- Dil değiştirme ---------- */
@@ -371,7 +398,6 @@
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhha214d21veHJidnBleWtqY3FmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzOTY2NDAsImV4cCI6MjEwNDk3MjY0MH0.zXEzKluYX_g7Ypi7IcpvTinvjvA52uxDoOKYkPowB0A';
 
   const CATEGORY_MAP = { 'Atıştırmalıklar':'atistirmalik', 'Ana Yemekler':'anayemek', 'Burger':'burger', 'Hamur İşleri':'hamurisi' };
-  
 
   function escapeHtml(str){
     const div = document.createElement('div');
