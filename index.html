@@ -18,6 +18,16 @@
   :root{
     --whitewash:#F7F3EA; --card:#EFE8D8; --ink:#21262B; --ink-soft:#4B5259;
     --deep-blue:#1F4B5C; --sea:#4E9B95; --terracotta:#C1602A; --line:#DCD2B9;
+    --surface:#FFFFFF; --header-bg:rgba(247,243,234,0.94);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --whitewash:#1A1D21; --card:#24272C; --ink:#EDE8DC; --ink-soft:#AFA795;
+      --deep-blue:#2C6A80; --sea:#5FB3AC; --terracotta:#E08A54; --line:#3A3D42;
+      --surface:#2A2D32; --header-bg:rgba(26,29,33,0.9);
+      color-scheme: dark;
+    }
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
@@ -28,7 +38,7 @@
   .wrap{max-width:1100px; margin:0 auto; padding:0 28px;}
   ul{list-style:none;}
 
-  header{position:sticky; top:0; z-index:50; background:rgba(247,243,234,0.94); backdrop-filter:blur(6px); border-bottom:1px solid var(--line);}
+  header{position:sticky; top:0; z-index:50; background:var(--header-bg); backdrop-filter:blur(6px); border-bottom:1px solid var(--line); transition:background .3s ease;}
   .header-inner{display:flex; align-items:center; justify-content:space-between; padding:16px 28px; max-width:1100px; margin:0 auto; gap:16px;}
   .logo{font-family:'Spectral', serif; font-size:1.3rem; font-weight:700; color:var(--deep-blue); white-space:nowrap;}
   .logo span{color:var(--terracotta);}
@@ -73,7 +83,7 @@
   }
   .reserve-form label{display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--ink);}
   .reserve-form input, .reserve-form select{
-    width:100%; padding:11px 14px; border:1.5px solid var(--line); background:#fff;
+    width:100%; padding:11px 14px; border:1.5px solid var(--line); background:var(--surface); color:var(--ink);
     font-family:inherit; font-size:0.95rem;
   }
   .reserve-form .full{grid-column:1 / -1;}
@@ -98,7 +108,7 @@
   .menu-tab{padding:9px 18px; border:1.5px solid var(--deep-blue); font-weight:600; font-size:0.9rem; background:transparent; color:var(--deep-blue); cursor:pointer; transition:background .2s ease, color .2s ease;}
   .menu-tab.active, .menu-tab:hover{background:var(--deep-blue); color:#fff;}
   .menu-search{position:relative;}
-  .menu-search input{padding:10px 16px 10px 38px; border:1.5px solid var(--line); background:#fff; font-family:inherit; font-size:0.9rem; width:220px; max-width:60vw;}
+  .menu-search input{padding:10px 16px 10px 38px; border:1.5px solid var(--line); background:var(--surface); color:var(--ink); font-family:inherit; font-size:0.9rem; width:220px; max-width:60vw;}
   .menu-search svg{position:absolute; left:12px; top:50%; transform:translateY(-50%); width:16px; height:16px; opacity:0.5;}
   .menu-category{display:none; opacity:0; transition:opacity .25s ease;}
   .menu-category.active{display:grid; grid-template-columns:1fr 1fr; gap:0 48px;}
@@ -168,7 +178,31 @@
     .menu-controls{flex-direction:column; align-items:flex-start;}
   }
   :focus-visible{outline:3px solid var(--terracotta); outline-offset:2px;}
-  @media (prefers-reduced-motion: reduce){ *{transition:none !important;} }
+
+  /* ---------- Scroll ile belirme animasyonu ---------- */
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in-view{opacity:1; transform:translateY(0);}
+
+  /* ---------- Hover efektleri ---------- */
+  .btn-primary{transition:transform .2s ease, box-shadow .2s ease;}
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 6px 16px rgba(193,96,42,0.35);}
+  .btn-secondary{transition:background .2s ease, color .2s ease;}
+  .btn-secondary:hover{background:#fff; color:var(--deep-blue);}
+  .review-card{transition:transform .25s ease, background .25s ease;}
+  .review-card:hover{transform:translateY(-4px); background:rgba(255,255,255,0.1);}
+  .gallery-grid > div{overflow:hidden;}
+  .gallery-grid img{transition:transform .4s ease;}
+  .gallery-grid > div:hover img{transform:scale(1.06);}
+  .feature-list div{transition:border-color .2s ease, transform .2s ease;}
+  .feature-list div:hover{border-color:var(--terracotta); transform:translateX(4px);}
+  .menu-item{transition:background .2s ease;}
+  .menu-item:hover{background:rgba(0,0,0,0.02);}
+  @media (prefers-color-scheme: dark){ .menu-item:hover{background:rgba(255,255,255,0.03);} }
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important;}
+    .reveal{opacity:1 !important; transform:none !important;}
+  }
 </style>
 </head>
 <body>
@@ -221,7 +255,7 @@
 </div>
 
 <section class="story" id="hikaye">
-  <div class="wrap story-grid">
+  <div class="wrap story-grid reveal">
     <img src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=700&q=80" alt="Kafe mutfağında hazırlık" loading="lazy">
     <div>
       <p class="kicker" data-tr="Hikâyemiz" data-en="Our Story">Hikâyemiz</p>
@@ -240,7 +274,7 @@
 
 <section id="menu">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <p class="kicker">À la Carte</p>
       <h2 data-tr="Menü" data-en="Menu">Menü</h2>
       <p data-tr="Ev yapımı lezzetler, günlük taze malzemelerle hazırlanır." data-en="Homemade dishes, prepared fresh every day.">Ev yapımı lezzetler, günlük taze malzemelerle hazırlanır.</p>
@@ -263,12 +297,12 @@
 
 <section id="rezervasyon">
   <div class="wrap">
-    <div class="section-head" style="margin-left:auto; margin-right:auto; text-align:center;">
+    <div class="section-head reveal" style="margin-left:auto; margin-right:auto; text-align:center;">
       <p class="kicker" data-tr="Rezervasyon" data-en="Reservation">Rezervasyon</p>
       <h2 data-tr="Masanı Ayırt" data-en="Reserve a Table">Masanı Ayırt</h2>
       <p data-tr="Formu doldur, WhatsApp'tan hazır mesajla bize ulaş — biz de en kısa sürede onaylayalım." data-en="Fill in the form and we'll get a ready message on WhatsApp — we'll confirm as soon as possible.">Formu doldur, WhatsApp'tan hazır mesajla bize ulaş — biz de en kısa sürede onaylayalım.</p>
     </div>
-    <form class="reserve-form" id="reserve-form">
+    <form class="reserve-form reveal" id="reserve-form">
       <div>
         <label data-tr="Ad Soyad" data-en="Full Name">Ad Soyad</label>
         <input type="text" id="res-name" required>
@@ -300,12 +334,12 @@
 
 <section id="galeri" style="background:var(--card); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <p class="kicker" data-tr="Kareler" data-en="Snapshots">Kareler</p>
       <h2 data-tr="Galeri" data-en="Gallery">Galeri</h2>
       <p data-tr="Sofradan, mutfaktan ve deniz manzarasından kareler." data-en="Moments from the table, the kitchen, and the sea view.">Sofradan, mutfaktan ve deniz manzarasından kareler.</p>
     </div>
-    <div class="gallery-grid">
+    <div class="gallery-grid reveal">
       <div><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" alt="Deniz kıyısı terası" loading="lazy"></div>
       <div><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500&q=80" alt="Sofra düzeni" loading="lazy"></div>
       <div><img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=500&q=80" alt="Servis edilen tabak" loading="lazy"></div>
@@ -318,11 +352,11 @@
 
 <section class="reviews" id="yorumlar">
   <div class="wrap">
-    <div class="section-head">
+    <div class="section-head reveal">
       <p class="kicker" data-tr="Misafirlerimizden" data-en="From our guests">Misafirlerimizden</p>
       <h2 data-tr="Yorumlar" data-en="Reviews">Yorumlar</h2>
     </div>
-    <div class="review-grid">
+    <div class="review-grid reveal">
       <div class="review-card"><p data-tr="Serpme kahvaltı harikaydı, deniz manzarası eşliğinde keyifli bir sabahtı." data-en="The breakfast spread was wonderful, a lovely morning with a sea view.">Serpme kahvaltı harikaydı, deniz manzarası eşliğinde keyifli bir sabahtı.</p><span>★★★★★ — Ayşe K.</span></div>
       <div class="review-card"><p data-tr="Her tabakta ev sıcaklığı hissediliyor, kuzu incik özellikle unutulmazdı." data-en="Every dish feels homemade, the lamb shank was especially unforgettable.">Her tabakta ev sıcaklığı hissediliyor, kuzu incik özellikle unutulmazdı.</p><span>★★★★★ — Daniel R.</span></div>
       <div class="review-card"><p data-tr="Sakin bir atmosfer ve adanın en güzel Türk kahvesi — favori köşemiz." data-en="A calm atmosphere and the island's best Turkish coffee — our favourite spot.">Sakin bir atmosfer ve adanın en güzel Türk kahvesi — favori köşemiz.</p><span>★★★★★ — Mehmet Ö.</span></div>
@@ -483,6 +517,17 @@
     }
   }
   loadMenu();
+
+  /* ---------- Scroll ile belirme animasyonu ---------- */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
   /* ---------- Menüde arama ---------- */
   function filterMenu(query){
