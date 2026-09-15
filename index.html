@@ -247,46 +247,15 @@
     </div>
 
     <div class="menu-controls">
-      <div class="menu-tabs">
-        <button class="menu-tab active" data-target="atistirmalik" data-tr="Atıştırmalıklar" data-en="Starters">Atıştırmalıklar</button>
-        <button class="menu-tab" data-target="anayemek" data-tr="Ana Yemekler" data-en="Main Courses">Ana Yemekler</button>
-        <button class="menu-tab" data-target="burger" data-tr="Burger" data-en="Burgers">Burger</button>
-        <button class="menu-tab" data-target="hamurisi" data-tr="Hamur İşleri" data-en="Pastries">Hamur İşleri</button>
-      </div>
+      <div class="menu-tabs" id="menu-tabs"></div>
       <div class="menu-search">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <input type="text" id="menu-search-input" data-tr-ph="Menüde ara…" data-en-ph="Search menu…" placeholder="Menüde ara…">
       </div>
     </div>
 
-    <div class="menu-category active show" id="atistirmalik">
-      <div class="menu-item"><div><div class="menu-item-name" data-tr="Bira Tabağı" data-en="Beer Platter">Bira Tabağı</div><div class="menu-item-desc" data-tr="4 sosis, 2 peynirli rulo, 4 soğan halkası, 4 mini tenders ve patates kızartması" data-en="4 sausages, 2 cheese rolls, 4 onion rings, 4 mini tenders and fries">4 sosis, 2 peynirli rulo, 4 soğan halkası, 4 mini tenders ve patates kızartması</div></div><div class="menu-item-price price-tbd" data-tr="eklenecek" data-en="TBD">eklenecek</div></div>
-      <div class="menu-item"><div><div class="menu-item-name" data-tr="Patates Kızartması" data-en="French Fries">Patates Kızartması</div><div class="menu-item-desc" data-tr="Küçük / Büyük" data-en="Small / Large">Küçük / Büyük</div></div><div class="menu-item-price price-tbd" data-tr="eklenecek" data-en="TBD">eklenecek</div></div>
-      <div class="menu-item"><div><div class="menu-item-name" data-tr="Tenders & Patates" data-en="Tenders & Fries">Tenders & Patates</div><div class="menu-item-desc" data-tr="3 adet tenders, patates kızartması ile" data-en="3 chicken tenders, served with fries">3 adet tenders, patates kızartması ile</div></div><div class="menu-item-price price-tbd" data-tr="eklenecek" data-en="TBD">eklenecek</div></div>
-      <div class="menu-item"><div><div class="menu-item-name" data-tr="Ballı Kaymaklı Saganaki" data-en="Honey & Cream Saganaki">Ballı Kaymaklı Saganaki</div><div class="menu-item-desc" data-tr="Kızarmış hellim, kaymak ve bal" data-en="Fried halloumi with clotted cream and honey">Kızarmış hellim, kaymak ve bal</div></div><div class="menu-item-price price-tbd" data-tr="eklenecek" data-en="TBD">eklenecek</div></div>
-      <div class="menu-item"><div><div class="menu-item-name" data-tr="Falafel" data-en="Falafel">Falafel</div><div class="menu-item-desc" data-tr="4 adet, limon-tahin sos ve turşu ile" data-en="4 pieces, with lemon-tahini sauce and pickles">4 adet, limon-tahin sos ve turşu ile</div></div><div class="menu-item-price price-tbd" data-tr="eklenecek" data-en="TBD">eklenecek</div></div>
-    </div>
-
-    <div class="menu-category" id="anayemek">
-      <div class="menu-item"><div><div class="menu-item-name" data-tr="Izgara Köfte" data-en="Grilled Meatballs">Izgara Köfte</div><div class="menu-item-desc" data-tr="200 g dana köfte, pilav, yoğurt, salata, patates" data-en="200g beef meatballs, rice, yogurt, salad, fries">200 g dana köfte, pilav, yoğurt, salata, patates</div></div><div class="menu-item-price price-tbd" data-tr="eklenecek" data-en="TBD">eklenecek</div></div>
-      <div class="menu-item"><div><div class="menu-item-name" data-tr="Kıbrıs Köftesi" data-en="Cyprus Meatballs">Kıbrıs Köftesi</div><div class="menu-item-desc" data-tr="Ev yapımı 4 köfte, haşlanmış börülce, Kıbrıs ekmeği" data-en="4 homemade meatballs, boiled black-eyed peas, Cyprus bread">Ev yapımı 4 köfte, haşlanmış börülce, Kıbrıs ekmeği</div></div><div class="menu-item-price price-tbd" data-tr="eklenecek" data-en="TBD">eklenecek</div></div>
-      <div class="menu-item"><div><div class="menu-item-name" data-tr="Izgara Tavuk" data-en="Grilled Chicken">Izgara Tavuk</div><div class="menu-item-desc" data-tr="200 g fileto, pilav ve salata ile" data-en="200g fillet, served with rice and salad">200 g fileto, pilav ve salata ile</div></div><div class="menu-item-price price-tbd" data-tr="eklenecek" data-en="TBD">eklenecek</div></div>
-      <div class="menu-item"><div><div class="menu-item-name" data-tr="Doldurulmuş Tavuk Göğsü" data-en="Stuffed Chicken Breast">Doldurulmuş Tavuk Göğsü</div><div class="menu-item-desc" data-tr="Mantarlı beşamel sos, pilav ve salata" data-en="Mushroom béchamel sauce, rice and salad">Mantarlı beşamel sos, pilav ve salata</div></div><div class="menu-item-price price-tbd" data-tr="eklenecek" data-en="TBD">eklenecek</div></div>
-      <div class="menu-item"><div><div class="menu-item-name" data-tr="Karışık Zeytinyağlı Dolma" data-en="Mixed Olive-Oil Dolma">Karışık Zeytinyağlı Dolma</div><div class="menu-item-desc" data-tr="Kuru biber, patlıcan ve yaprak sarma, yoğurtla" data-en="Stuffed dried peppers, eggplant and vine leaves, with yogurt">Kuru biber, patlıcan ve yaprak sarma, yoğurtla</div></div><div class="menu-item-price price-tbd" data-tr="eklenecek" data-en="TBD">eklenecek</div></div>
-      <div class="menu-item"><div><div class="menu-item-name" data-tr="Tavuk Curry" data-en="Chicken Curry">Tavuk Curry</div><div class="menu-item-desc" data-tr="Köri baharatlı, kremalı, pilav ve patates ile" data-en="Curry-spiced and creamy, served with rice and potatoes">Köri baharatlı, kremalı, pilav ve patates ile</div></div><div class="menu-item-price price-tbd" data-tr="eklenecek" data-en="TBD">eklenecek</div></div>
-    </div>
-
-    <div class="menu-category" id="burger">
-      <div class="menu-item"><div><div class="menu-item-name">Mel&Mer Special Burger</div><div class="menu-item-desc" data-tr="130 g dana köfte, karamelize soğan, mantar, cheddar" data-en="130g beef patty, caramelised onion, mushroom, cheddar">130 g dana köfte, karamelize soğan, mantar, cheddar</div></div><div class="menu-item-price price-tbd" data-tr="eklenecek" data-en="TBD">eklenecek</div></div>
-      <div class="menu-item"><div><div class="menu-item-name" data-tr="Chicken Burger" data-en="Chicken Burger">Chicken Burger</div><div class="menu-item-desc" data-tr="Çıtır tavuk, cheddar, domates, marul, patates" data-en="Crispy chicken, cheddar, tomato, lettuce, fries">Çıtır tavuk, cheddar, domates, marul, patates</div></div><div class="menu-item-price price-tbd" data-tr="eklenecek" data-en="TBD">eklenecek</div></div>
-      <div class="menu-item"><div><div class="menu-item-name" data-tr="Bacon Burger" data-en="Bacon Burger">Bacon Burger</div><div class="menu-item-desc" data-tr="130 g köfte, mantar, karamelize soğan, bacon, cheddar" data-en="130g patty, mushroom, caramelised onion, bacon, cheddar">130 g köfte, mantar, karamelize soğan, bacon, cheddar</div></div><div class="menu-item-price price-tbd" data-tr="eklenecek" data-en="TBD">eklenecek</div></div>
-      <div class="menu-item"><div><div class="menu-item-name" data-tr="Cheeseburger" data-en="Cheeseburger">Cheeseburger</div><div class="menu-item-desc" data-tr="130 g köfte, cheddar, domates, marul, patates" data-en="130g patty, cheddar, tomato, lettuce, fries">130 g köfte, cheddar, domates, marul, patates</div></div><div class="menu-item-price price-tbd" data-tr="eklenecek" data-en="TBD">eklenecek</div></div>
-    </div>
-
-    <div class="menu-category" id="hamurisi">
-      <div class="menu-item"><div><div class="menu-item-name" data-tr="Mantı" data-en="Mantı (Dumplings)">Mantı</div><div class="menu-item-desc" data-tr="Ev yapımı, yoğurt sosu ve kırmızı biberli tereyağı" data-en="Homemade, with yogurt sauce and red-pepper butter">Ev yapımı, yoğurt sosu ve kırmızı biberli tereyağı</div></div><div class="menu-item-price price-tbd" data-tr="eklenecek" data-en="TBD">eklenecek</div></div>
-      <div class="menu-item"><div><div class="menu-item-name" data-tr="Pirohu" data-en="Pirohu">Pirohu</div><div class="menu-item-desc" data-tr="Nane ve lor peyniri ile doldurulmuş, rendelenmiş hellimli" data-en="Filled with mint and curd cheese, topped with grated halloumi">Nane ve lor peyniri ile doldurulmuş, rendelenmiş hellimli</div></div><div class="menu-item-price price-tbd" data-tr="eklenecek" data-en="TBD">eklenecek</div></div>
-      <div class="menu-item"><div><div class="menu-item-name" data-tr="Hellim Böreği" data-en="Halloumi Pastry">Hellim Böreği</div><div class="menu-item-desc" data-tr="10 adet hellim dolgulu börek, bal ile" data-en="10 pieces filled with halloumi, served with honey">10 adet hellim dolgulu börek, bal ile</div></div><div class="menu-item-price price-tbd" data-tr="eklenecek" data-en="TBD">eklenecek</div></div>
+    <div id="menu-content">
+      <p id="menu-loading" data-tr="Menü yükleniyor…" data-en="Loading menu…">Menü yükleniyor…</p>
     </div>
     <p class="no-results" id="no-results" data-tr="Aramanla eşleşen ürün bulunamadı." data-en="No dishes match your search.">Aramanla eşleşen ürün bulunamadı.</p>
   </div>
@@ -398,7 +367,9 @@
 <script>
   /* ---------- Dil değiştirme ---------- */
   let currentLang = localStorage.getItem('lang') || 'tr';
-  let liveMenuData = null;
+  let categoriesData = [];
+  let menuItemsData = [];
+  let activeCategoryId = null;
 
   function applyLanguage(lang){
     currentLang = lang;
@@ -412,7 +383,7 @@
       el.placeholder = lang === 'en' ? el.dataset.enPh : el.dataset.trPh;
     });
     document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
-    renderMenuFromCache();
+    if(categoriesData.length) renderMenu();
   }
 
   document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -436,41 +407,9 @@
     window.open('https://wa.me/905488680818?text=' + encodeURIComponent(message), '_blank');
   });
 
-  /* ---------- Menü sekmeleri (yumuşak geçiş) ---------- */
-  const tabs = document.querySelectorAll('.menu-tab');
-  const categories = document.querySelectorAll('.menu-category');
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(t => t.classList.remove('active'));
-      categories.forEach(c => { c.classList.remove('active', 'show'); });
-      tab.classList.add('active');
-      const target = document.getElementById(tab.dataset.target);
-      target.classList.add('active');
-      requestAnimationFrame(() => target.classList.add('show'));
-      document.getElementById('menu-search-input').value = '';
-      filterMenu('');
-    });
-  });
-
-  /* ---------- Menüde arama ---------- */
-  function filterMenu(query){
-    const q = query.trim().toLocaleLowerCase('tr');
-    let anyVisible = false;
-    document.querySelectorAll('.menu-category.active .menu-item').forEach(item => {
-      const text = item.textContent.toLocaleLowerCase('tr');
-      const match = q === '' || text.includes(q);
-      item.classList.toggle('hidden', !match);
-      if(match) anyVisible = true;
-    });
-    document.getElementById('no-results').style.display = (q !== '' && !anyVisible) ? 'block' : 'none';
-  }
-  document.getElementById('menu-search-input').addEventListener('input', e => filterMenu(e.target.value));
-
-  /* ---------- Supabase'ten canlı fiyat çekme ---------- */
+  /* ---------- Menü: kategoriler + ürünler (Supabase'ten dinamik) ---------- */
   const SUPABASE_URL = 'https://xakmxwmoxrbvpeykjcqf.supabase.co';
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhha214d21veHJidnBleWtqY3FmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzOTY2NDAsImV4cCI6MjEwNDk3MjY0MH0.zXEzKluYX_g7Ypi7IcpvTinvjvA52uxDoOKYkPowB0A';
-
-  const CATEGORY_MAP = { 'Atıştırmalıklar':'atistirmalik', 'Ana Yemekler':'anayemek', 'Burger':'burger', 'Hamur İşleri':'hamurisi' };
 
   function escapeHtml(str){
     const div = document.createElement('div');
@@ -489,29 +428,75 @@
     </div>`;
   }
 
-  function renderMenuFromCache(){
-    if(!liveMenuData) return;
-    Object.entries(CATEGORY_MAP).forEach(([label, id]) => {
-      const container = document.getElementById(id);
-      const items = liveMenuData.filter(i => i.category === label);
-      if(container && items.length) container.innerHTML = items.map(renderMenuItem).join('');
+  function renderTabs(){
+    const tabsContainer = document.getElementById('menu-tabs');
+    tabsContainer.innerHTML = categoriesData.map(cat => {
+      const label = (currentLang === 'en' && cat.name_en) ? cat.name_en : cat.name_tr;
+      const activeClass = cat.id === activeCategoryId ? 'active' : '';
+      return `<button class="menu-tab ${activeClass}" data-cat-id="${cat.id}">${escapeHtml(label)}</button>`;
+    }).join('');
+    tabsContainer.querySelectorAll('.menu-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeCategoryId = btn.dataset.catId;
+        document.getElementById('menu-search-input').value = '';
+        renderTabs();
+        renderMenuContent();
+      });
     });
+  }
+
+  function renderMenuContent(){
+    const container = document.getElementById('menu-content');
+    const cat = categoriesData.find(c => c.id === activeCategoryId);
+    if(!cat){ container.innerHTML = ''; return; }
+    const items = menuItemsData.filter(i => i.category === cat.name_tr);
+    container.innerHTML = `<div class="menu-category active show">${items.map(renderMenuItem).join('')}</div>`;
     filterMenu(document.getElementById('menu-search-input').value);
   }
 
-  async function loadLiveMenu(){
-    if(SUPABASE_URL.includes('YOUR_') || SUPABASE_ANON_KEY.includes('YOUR_')) return;
+  function renderMenu(){
+    if(!categoriesData.length){
+      document.getElementById('menu-content').innerHTML =
+        `<p id="menu-loading" data-tr="Menü yüklenemedi, lütfen sayfayı yenileyin." data-en="Menu could not be loaded, please refresh.">Menü yüklenemedi, lütfen sayfayı yenileyin.</p>`;
+      return;
+    }
+    if(!activeCategoryId) activeCategoryId = categoriesData[0].id;
+    renderTabs();
+    renderMenuContent();
+  }
+
+  async function loadMenu(){
     try{
       const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-      const { data, error } = await supabaseClient.from('menu_items').select('*').order('sort_order');
-      if(error || !data || !data.length) return;
-      liveMenuData = data;
-      renderMenuFromCache();
+      const [catRes, itemRes] = await Promise.all([
+        supabaseClient.from('categories').select('*').order('sort_order'),
+        supabaseClient.from('menu_items').select('*').order('sort_order')
+      ]);
+      if(catRes.error || !catRes.data || !catRes.data.length) throw catRes.error || new Error('Kategori bulunamadı');
+      categoriesData = catRes.data;
+      menuItemsData = itemRes.data || [];
+      renderMenu();
     }catch(e){
-      console.error('Menü yüklenemedi, sabit menü gösteriliyor:', e);
+      console.error('Menü yüklenemedi:', e);
+      document.getElementById('menu-content').innerHTML =
+        `<p id="menu-loading" data-tr="Menü yüklenemedi, lütfen sayfayı yenileyin." data-en="Menu could not be loaded, please refresh.">Menü yüklenemedi, lütfen sayfayı yenileyin.</p>`;
     }
   }
-  loadLiveMenu();
+  loadMenu();
+
+  /* ---------- Menüde arama ---------- */
+  function filterMenu(query){
+    const q = query.trim().toLocaleLowerCase('tr');
+    let anyVisible = false;
+    document.querySelectorAll('.menu-category.active .menu-item').forEach(item => {
+      const text = item.textContent.toLocaleLowerCase('tr');
+      const match = q === '' || text.includes(q);
+      item.classList.toggle('hidden', !match);
+      if(match) anyVisible = true;
+    });
+    document.getElementById('no-results').style.display = (q !== '' && !anyVisible) ? 'block' : 'none';
+  }
+  document.getElementById('menu-search-input').addEventListener('input', e => filterMenu(e.target.value));
 </script>
 
 </body>
