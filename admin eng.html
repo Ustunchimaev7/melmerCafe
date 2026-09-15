@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mel & Mer — Menü Yönetimi</title>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  :root{
+    --whitewash:#F7F3EA; --ink:#21262B; --ink-soft:#4B5259;
+    --deep-blue:#1F4B5C; --terracotta:#C1602A; --line:#DCD2B9; --card:#EFE8D8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family:'Work Sans', sans-serif; background:var(--whitewash); color:var(--ink);
+    margin:0; padding:0;
+  }
+  h1,h2{font-family:'Spectral', serif;}
+  .wrap{max-width:900px; margin:0 auto; padding:40px 24px;}
+
+  /* Login */
+  #login-screen{
+    min-height:100vh; display:flex; align-items:center; justify-content:center;
+    background:var(--deep-blue);
+  }
+  .login-box{
+    background:var(--whitewash); padding:40px; width:100%; max-width:360px;
+  }
+  .login-box h1{font-size:1.5rem; margin-bottom:6px; color:var(--deep-blue);}
+  .login-box p{color:var(--ink-soft); font-size:0.9rem; margin-bottom:24px;}
+  label{display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px;}
+  input, select, textarea{
+    width:100%; padding:10px 12px; border:1px solid var(--line); background:#fff;
+    font-family:inherit; font-size:0.95rem; margin-bottom:16px;
+  }
+  button{
+    cursor:pointer; border:none; font-weight:600; font-family:inherit; font-size:0.9rem;
+  }
+  .btn-primary{background:var(--terracotta); color:#fff; padding:12px 20px; width:100%;}
+  .error-msg{color:#B3261E; font-size:0.85rem; margin-bottom:12px; display:none;}
+
+  /* Dashboard */
+  #dashboard{display:none;}
+  .top-bar{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:16px 24px; background:var(--deep-blue); color:#fff;
+  }
+  .top-bar button{background:transparent; color:#E8E0CB; border:1px solid #E8E0CB; padding:8px 16px;}
+  .category-block{margin-bottom:36px;}
+  .category-block h2{font-size:1.3rem; color:var(--deep-blue); margin-bottom:14px; border-bottom:2px solid var(--terracotta); padding-bottom:6px;}
+  .item-row{
+    display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--line);
+  }
+  .item-row .name{flex:1; font-weight:600;}
+  .item-row .desc{flex:2; font-size:0.85rem; color:var(--ink-soft);}
+  .item-row input.price-input{width:110px; margin:0;}
+  .item-row .save-btn{background:var(--deep-blue); color:#fff; padding:8px 14px; font-size:0.82rem;}
+  .item-row .delete-btn{background:transparent; color:#B3261E; padding:8px 10px; font-size:0.82rem;}
+  .saved-tag{color:#3B7A3B; font-size:0.8rem; display:none;}
+
+  .add-form{
+    background:var(--card); padding:24px; margin-top:40px;
+  }
+  .add-form h2{font-size:1.15rem; margin-bottom:16px;}
+  .add-form .row{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <h1>Mel & Mer</h1>
+    <p>Menü yönetim paneli — sadece yetkili girişi</p>
+    <div class="error-msg" id="login-error">E-posta veya şifre hatalı.</div>
+    <label for="email">E-posta</label>
+    <input type="email" id="email" placeholder="ornek@melmercafe.com">
+    <label for="password">Şifre</label>
+    <input type="password" id="password">
+    <button class="btn-primary" id="login-btn">Giriş Yap</button>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <div class="top-bar">
+    <strong>Mel & Mer — Menü Yönetimi</strong>
+    <button id="logout-btn">Çıkış Yap</button>
+  </div>
+  <div class="wrap">
+    <div id="menu-list">Yükleniyor…</div>
+
+    <div class="add-form">
+      <h2>Yeni Ürün Ekle</h2>
+      <div class="row">
+        <div>
+          <label>Kategori</label>
+          <select id="new-category">
+            <option>Atıştırmalıklar</option>
+            <option>Ana Yemekler</option>
+            <option>Burger</option>
+            <option>Hamur İşleri</option>
+          </select>
+        </div>
+        <div>
+          <label>Fiyat</label>
+          <input type="text" id="new-price" placeholder="örn. 250₺">
+        </div>
+      </div>
+      <label>Ürün Adı (Türkçe)</label>
+      <input type="text" id="new-name" placeholder="örn. Izgara Köfte">
+      <label>Açıklama (Türkçe)</label>
+      <textarea id="new-desc" rows="2" placeholder="örn. 200 g dana köfte, pilav ve salata ile"></textarea>
+      <label>Ürün Adı (İngilizce, opsiyonel)</label>
+      <input type="text" id="new-name-en" placeholder="e.g. Grilled Meatballs">
+      <label>Açıklama (İngilizce, opsiyonel)</label>
+      <textarea id="new-desc-en" rows="2" placeholder="e.g. 200g beef meatballs, rice and salad"></textarea>
+      <button class="btn-primary" id="add-btn" style="width:auto; padding:12px 24px;">Ürünü Ekle</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ↓↓↓ Supabase proje ayarların — Supabase panelinden Project Settings > API'den kopyala
+  const SUPABASE_URL = 'https://xakmxwmoxrbvpeykjcqf.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhha214d21veHJidnBleWtqY3FmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkzOTY2NDAsImV4cCI6MjEwNDk3MjY0MH0.zXEzKluYX_g7Ypi7IcpvTinvjvA52uxDoOKYkPowB0A';
+  const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const loginScreen = document.getElementById('login-screen');
+  const dashboard = document.getElementById('dashboard');
+  const loginError = document.getElementById('login-error');
+
+  // Oturum kontrolü
+  supabaseClient.auth.getSession().then(({data}) => {
+    if(data.session) showDashboard();
+  });
+
+  document.getElementById('login-btn').addEventListener('click', async () => {
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+    if(error){
+      loginError.style.display = 'block';
+      return;
+    }
+    loginError.style.display = 'none';
+    showDashboard();
+  });
+
+  document.getElementById('logout-btn').addEventListener('click', async () => {
+    await supabaseClient.auth.signOut();
+    dashboard.style.display = 'none';
+    loginScreen.style.display = 'flex';
+  });
+
+  function showDashboard(){
+    loginScreen.style.display = 'none';
+    dashboard.style.display = 'block';
+    loadItems();
+  }
+
+  function escapeHtml(str){
+    const div = document.createElement('div');
+    div.textContent = str || '';
+    return div.innerHTML;
+  }
+
+  async function loadItems(){
+    const { data, error } = await supabaseClient.from('menu_items').select('*').order('category').order('sort_order');
+    const container = document.getElementById('menu-list');
+    if(error){
+      container.innerHTML = '<p style="color:#B3261E;">Menü yüklenemedi: ' + escapeHtml(error.message) + '</p>';
+      return;
+    }
+    const categories = [...new Set(data.map(i => i.category))];
+    container.innerHTML = categories.map(cat => `
+      <div class="category-block">
+        <h2>${escapeHtml(cat)}</h2>
+        ${data.filter(i => i.category === cat).map(renderRow).join('')}
+      </div>
+    `).join('');
+
+    container.querySelectorAll('.save-btn').forEach(btn => {
+      btn.addEventListener('click', () => saveItem(btn.dataset.id));
+    });
+    container.querySelectorAll('.delete-btn').forEach(btn => {
+      btn.addEventListener('click', () => deleteItem(btn.dataset.id));
+    });
+  }
+
+  function renderRow(item){
+    return `
+      <div class="item-row" data-row="${item.id}" style="flex-wrap:wrap;">
+        <div class="name">${escapeHtml(item.name)}</div>
+        <div class="desc">${escapeHtml(item.description)}</div>
+        <input class="price-input" type="text" value="${escapeHtml(item.price)}" id="price-${item.id}" placeholder="fiyat">
+        <button class="save-btn" data-id="${item.id}">Kaydet</button>
+        <span class="saved-tag" id="saved-${item.id}">✓ kaydedildi</span>
+        <button class="delete-btn" data-id="${item.id}">Sil</button>
+        <div style="flex-basis:100%; display:flex; gap:10px; margin-top:6px;">
+          <input type="text" id="name-en-${item.id}" value="${escapeHtml(item.name_en || '')}" placeholder="İngilizce isim" style="flex:1; margin:0; font-size:0.85rem;">
+          <input type="text" id="desc-en-${item.id}" value="${escapeHtml(item.description_en || '')}" placeholder="İngilizce açıklama" style="flex:2; margin:0; font-size:0.85rem;">
+        </div>
+      </div>
+    `;
+  }
+
+  async function saveItem(id){
+    const price = document.getElementById('price-' + id).value;
+    const name_en = document.getElementById('name-en-' + id).value;
+    const description_en = document.getElementById('desc-en-' + id).value;
+    const { error } = await supabaseClient.from('menu_items').update({ price, name_en, description_en }).eq('id', id);
+    if(error){ alert('Kaydedilemedi: ' + error.message); return; }
+    const tag = document.getElementById('saved-' + id);
+    tag.style.display = 'inline';
+    setTimeout(() => tag.style.display = 'none', 1800);
+  }
+
+  async function deleteItem(id){
+    if(!confirm('Bu ürünü silmek istediğine emin misin?')) return;
+    const { error } = await supabaseClient.from('menu_items').delete().eq('id', id);
+    if(error){ alert('Silinemedi: ' + error.message); return; }
+    loadItems();
+  }
+
+  document.getElementById('add-btn').addEventListener('click', async () => {
+    const category = document.getElementById('new-category').value;
+    const name = document.getElementById('new-name').value.trim();
+    const description = document.getElementById('new-desc').value.trim();
+    const name_en = document.getElementById('new-name-en').value.trim();
+    const description_en = document.getElementById('new-desc-en').value.trim();
+    const price = document.getElementById('new-price').value.trim();
+    if(!name){ alert('Ürün adı gerekli.'); return; }
+    const { error } = await supabaseClient.from('menu_items').insert({ category, name, description, name_en, description_en, price, sort_order: 99 });
+    if(error){ alert('Eklenemedi: ' + error.message); return; }
+    document.getElementById('new-name').value = '';
+    document.getElementById('new-desc').value = '';
+    document.getElementById('new-name-en').value = '';
+    document.getElementById('new-desc-en').value = '';
+    document.getElementById('new-price').value = '';
+    loadItems();
+  });
+</script>
+</body>
+</html>
