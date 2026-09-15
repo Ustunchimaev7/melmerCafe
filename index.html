@@ -65,6 +65,24 @@
   .section-head h2{font-size:2.1rem; margin-bottom:14px;}
   .section-head p{color:var(--ink-soft); font-size:1.05rem;}
 
+  .reserve-form{
+    max-width:640px; margin:0 auto;
+    display:grid; grid-template-columns:1fr 1fr; gap:18px;
+    background:var(--card); padding:36px; border:1px solid var(--line);
+  }
+  .reserve-form label{display:block; font-size:0.85rem; font-weight:600; margin-bottom:6px; color:var(--ink);}
+  .reserve-form input, .reserve-form select{
+    width:100%; padding:11px 14px; border:1.5px solid var(--line); background:#fff;
+    font-family:inherit; font-size:0.95rem;
+  }
+  .reserve-form .full{grid-column:1 / -1;}
+  .reserve-form .submit-btn{
+    grid-column:1 / -1; background:var(--terracotta); color:#fff; border:none;
+    padding:14px 26px; font-weight:700; font-size:0.95rem; cursor:pointer;
+  }
+  .reserve-note{grid-column:1 / -1; font-size:0.82rem; color:var(--ink-soft);}
+  @media (max-width:640px){ .reserve-form{grid-template-columns:1fr; padding:24px;} }
+
   .story{background:var(--card); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
   .story-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px; align-items:center;}
   .story-grid img{border-radius:2px;}
@@ -161,6 +179,7 @@
       <ul>
         <li><a href="#hikaye" data-tr="Hikâye" data-en="Story">Hikâye</a></li>
         <li><a href="#menu" data-tr="Menü" data-en="Menu">Menü</a></li>
+        <li><a href="#rezervasyon" data-tr="Rezervasyon" data-en="Reserve">Rezervasyon</a></li>
         <li><a href="#galeri" data-tr="Galeri" data-en="Gallery">Galeri</a></li>
         <li><a href="#yorumlar" data-tr="Yorumlar" data-en="Reviews">Yorumlar</a></li>
         <li><a href="#iletisim" data-tr="Bize Ulaşın" data-en="Contact">Bize Ulaşın</a></li>
@@ -171,7 +190,7 @@
         <button class="lang-btn" data-lang="tr">TR</button>
         <button class="lang-btn" data-lang="en">EN</button>
       </div>
-      <a class="header-cta" href="https://wa.me/905488680818" target="_blank" rel="noopener" data-tr="Rezervasyon" data-en="Reserve">Rezervasyon</a>
+      <a class="header-cta" href="#rezervasyon" data-tr="Rezervasyon" data-en="Reserve">Rezervasyon</a>
     </div>
   </div>
 </header>
@@ -185,7 +204,7 @@
       <p data-tr="Serpme kahvaltı ve taze Akdeniz mutfağı — dalgaların sesine eşlik ettiği bir sofra." data-en="Traditional Turkish breakfast and fresh Mediterranean cuisine — a table by the sound of the waves.">Serpme kahvaltı ve taze Akdeniz mutfağı — dalgaların sesine eşlik ettiği bir sofra.</p>
       <div class="btn-row">
         <a href="#menu" class="btn btn-primary" data-tr="Menüyü Gör" data-en="View Menu">Menüyü Gör</a>
-        <a href="https://wa.me/905488680818" target="_blank" rel="noopener" class="btn btn-secondary" data-tr="WhatsApp'tan Yaz" data-en="Message on WhatsApp">WhatsApp'tan Yaz</a>
+        <a href="#rezervasyon" class="btn btn-secondary" data-tr="Rezervasyon Yap" data-en="Reserve a Table">Rezervasyon Yap</a>
       </div>
     </div>
   </div>
@@ -199,6 +218,43 @@
     <div><strong data-tr="Aile işletmesi" data-en="Family-run">Aile işletmesi</strong><span data-tr="İlk günden bu yana" data-en="Since day one">İlk günden bu yana</span></div>
   </div>
 </div>
+
+<section id="rezervasyon">
+  <div class="wrap">
+    <div class="section-head" style="margin-left:auto; margin-right:auto; text-align:center;">
+      <p class="kicker" data-tr="Rezervasyon" data-en="Reservation">Rezervasyon</p>
+      <h2 data-tr="Masanı Ayırt" data-en="Reserve a Table">Masanı Ayırt</h2>
+      <p data-tr="Formu doldur, WhatsApp'tan hazır mesajla bize ulaş — biz de en kısa sürede onaylayalım." data-en="Fill in the form and we'll get a ready message on WhatsApp — we'll confirm as soon as possible.">Formu doldur, WhatsApp'tan hazır mesajla bize ulaş — biz de en kısa sürede onaylayalım.</p>
+    </div>
+    <form class="reserve-form" id="reserve-form">
+      <div>
+        <label data-tr="Ad Soyad" data-en="Full Name">Ad Soyad</label>
+        <input type="text" id="res-name" required>
+      </div>
+      <div>
+        <label data-tr="Telefon" data-en="Phone">Telefon</label>
+        <input type="tel" id="res-phone" placeholder="+90 5xx xxx xx xx">
+      </div>
+      <div>
+        <label data-tr="Tarih" data-en="Date">Tarih</label>
+        <input type="date" id="res-date" required>
+      </div>
+      <div>
+        <label data-tr="Saat" data-en="Time">Saat</label>
+        <input type="time" id="res-time" required>
+      </div>
+      <div class="full">
+        <label data-tr="Kişi Sayısı" data-en="Number of Guests">Kişi Sayısı</label>
+        <select id="res-guests">
+          <option>1</option><option>2</option><option selected>3</option><option>4</option>
+          <option>5</option><option>6</option><option>7</option><option>8+</option>
+        </select>
+      </div>
+      <button type="submit" class="submit-btn" data-tr="WhatsApp'tan Gönder" data-en="Send via WhatsApp">WhatsApp'tan Gönder</button>
+      <p class="reserve-note" data-tr="Not: Rezervasyon bu formla otomatik onaylanmaz, WhatsApp'tan dönüş yapılır." data-en="Note: this form doesn't confirm the reservation automatically — we'll reply on WhatsApp.">Not: Rezervasyon bu formla otomatik onaylanmaz, WhatsApp'tan dönüş yapılır.</p>
+    </form>
+  </div>
+</section>
 
 <section class="story" id="hikaye">
   <div class="wrap story-grid">
@@ -362,6 +418,22 @@
     btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
   });
   applyLanguage(currentLang);
+
+  /* ---------- Rezervasyon formu ---------- */
+  document.getElementById('reserve-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('res-name').value.trim();
+    const phone = document.getElementById('res-phone').value.trim();
+    const date = document.getElementById('res-date').value;
+    const time = document.getElementById('res-time').value;
+    const guests = document.getElementById('res-guests').value;
+
+    const message = currentLang === 'en'
+      ? `Hello, I'd like to make a reservation.\nName: ${name}\nPhone: ${phone || '-'}\nDate: ${date}\nTime: ${time}\nGuests: ${guests}`
+      : `Merhaba, rezervasyon yapmak istiyorum.\nAd Soyad: ${name}\nTelefon: ${phone || '-'}\nTarih: ${date}\nSaat: ${time}\nKişi Sayısı: ${guests}`;
+
+    window.open('https://wa.me/905488680818?text=' + encodeURIComponent(message), '_blank');
+  });
 
   /* ---------- Menü sekmeleri (yumuşak geçiş) ---------- */
   const tabs = document.querySelectorAll('.menu-tab');
